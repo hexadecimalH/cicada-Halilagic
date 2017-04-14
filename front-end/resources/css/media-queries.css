@@ -1,0 +1,222 @@
+@media only screen and (max-width: 1300px) and (min-width:1000px ) {
+    .details{
+        height:auto;
+    }
+}
+@media only screen and (max-width: 990px) {
+    .head h1{
+        font-size: 15px;
+    }
+    article{
+        height:auto;
+    }
+    figure{
+        height:auto;
+    }
+    .servicesSectionMobile{
+        display:block;
+    }
+    .serviceContainer{
+        display:none;
+    }
+    .serviceUnitMobile{
+        display:block;
+    }
+    .seeMore p{
+        padding-top:1em;
+    }
+    .infoMobile img{
+        height:20px;
+    }
+    .infoMobile ul{
+        list-style-type: none;
+    }
+    .infoMobile ul li{
+        text-align: center;
+        margin: 2.3em 0;
+    }
+    .infoMobile{
+        background-color:rgb(32,54,72);
+        padding: 2em 0em;
+    }
+    .mapMobile{
+        padding:0;
+    }
+    
+    .mobileForm{
+        display:block;
+        padding:0 !important;
+    }
+    .mobileInfo{
+        padding:0;
+    }
+    .divs{
+        display:none;
+    }
+    .notShow{
+        display:none;
+    }
+    .details{
+        height:auto;
+    }
+    .contactus{
+        height:auto;
+    }
+    .person img{
+        width:125px;
+        height:325px;
+    }
+    .social ul{
+        padding:0;
+    }
+    #logo{
+        width:100%;
+        height:auto;
+    }
+    .aboutTxt{
+        text-align: center;
+    }
+    .mizan img{
+        margin-top:0;
+    }
+}
+@media only screen and (max-width: 770px) {
+    .footerMenu ul{
+        display:none;
+    }
+    .serviceUnitMobile{
+        font-size:12px;
+    }
+    figure{
+        height:auto;
+    }
+    .notVisible{
+        display:none;
+    }
+    header{
+        display:none;
+    }
+    .logoAbout img{
+        display:none;
+    }
+    .arrow{
+        top:38%;
+    }
+    .serviceContainer{
+        display:none;
+    }
+    nav{
+        display:block;
+    }
+    .details{
+        overflow: hidden;
+    }
+    .map div{
+        width:100%;
+        margin:0;
+    }
+    .info ul{
+        text-align:left;
+        padding-left:10em;
+        list-style-type: none;
+    }
+    .info ul li{
+        margin:2.3em 0;
+        color:#fff;
+    }
+    .infoBackground{
+        height:auto;
+    }
+}
+@media screen and (max-width: 420px) and (max-height: 740px){
+    article{
+        height:auto;
+    }
+    .caption{
+        display:none;
+    }
+    figure{
+        height:auto;
+    }
+    .head h1{
+        font-size:23px;
+    }
+    .skrewedPart {
+        height: 57%;
+        width:120%;
+    }
+    .hiddenBar{
+        width: 64.3%;
+        top:8%;
+    }
+    nav{
+        height:8%;
+    }
+    .clients{
+        height:16%;
+    }
+    .clients img{
+        width:100%;
+    }
+    main{
+        background-size: 190% 130%;
+    }
+    .head h1{
+        font-size:17px;
+    }
+    main{
+        background-size: 160% 130% !important;
+    }
+    .text p{
+        text-align:justify;
+    }
+    .text h3{
+        text-align:center;
+    }
+    
+}
+@media only screen and (max-height: 640px) and (max-width: 420px) {
+    article{
+        height:auto;
+    }
+    figure{
+        height:auto;
+    }
+    .details{
+        height:auto;
+    }
+    .contactus {
+        height: auto;
+    }
+    .headlight{
+        height:465px !important;
+    }
+}
+@media only screen and (max-height: 736px) and (max-width: 414px) {
+    article{
+        height:auto;
+    }
+    figure{
+        height:auto;
+    }
+}
+@media only screen and (max-height: 640px) and (max-width: 420px) {
+    article{
+        height:auto;
+    }
+    figure{
+        height:auto;
+    }
+    .details{
+        height:auto;
+    }
+    .contactus {
+        height: auto;
+    }
+}
+@media only screen and (max-width: 375px) {
+
+    figure{
+        height:auto;
+    }
+}

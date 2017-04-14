@@ -1,0 +1,279 @@
+@font-face {
+    font-family: Ubuntu;
+    src: url(../fonts/Ubuntu-R.ttf);
+}
+*{
+    font-family: Ubuntu;
+}
+/* headline */
+.main{
+    height:30%;
+    width:100%;
+    background-size:100% 130%;
+}
+.mainFrame{
+    z-index:10;
+    width:100%;
+    height:100%;
+    background: url("/front-end/resources/img/front1.jpg") no-repeat fixed center;
+    background-color:rgba(34,57,76,0.9);
+    background-size:100% 115%;
+    float:left;
+    display:block;
+}
+.mainFrame h1{
+    text-align: center;
+    color:#fff;
+    margin-top:3em;
+    margin-bottom:2em;
+}
+/*projects factory*/
+.projects{
+    padding:3% 10%;
+}
+.thumb{
+    padding:0 5%;
+}
+.text{
+    margin-top:3em;
+}
+.caption{
+    padding:0 !important;
+    text-align:center;
+}
+.caption p{
+    margin:0 !important;
+}
+.thumbnail > div:hover .thumbnail{
+    background-color:#000;
+}
+.toExample{
+    background: url('/front-end/resources/img/world.svg') no-repeat fixed bottom;
+}
+/*.thumbnail{
+    padding:5% 0;
+}*/
+/* Modal body editing*/
+.modal-body img{
+    width:100%;
+    height:auto;
+}
+.modal-body{
+    padding:0 !important;
+}
+.arrow{
+    position:absolute;
+    top:50%;
+    width:3% !important;
+    cursor:pointer;
+}
+/*Clients*/
+.clients{
+    height:25%;
+    display:table;
+    cursor: pointer;
+}
+.clients img{
+    display:table-cell;
+    vertical-align: middle;
+    margin:auto;
+    width:50%;
+}
+.stig img{
+    padding:10% 0;
+}
+.barbosa img{
+    padding:7% 0;
+}
+.mizan img{
+    height:60%;
+    margin-top:1.5em;
+}
+/*Map section*/
+.map div{
+    padding:0;
+}
+.map{
+    background-color:rgb(32,54,72);
+    overflow: hidden;
+}
+.info ul{
+    text-align: center;
+    margin:0;
+    list-style-type: none;
+}
+.info ul li{
+    margin:2.3em 0;
+    color:#fff;
+}
+.info img{
+    height:25px;
+}
+.googleMap{
+    pointer-events:none;
+}
+.googleMap iframe{
+    min-height:257px;
+    max-height:450px;
+}
+.textExample{
+    background-color:rgba(34,57,76,0.8);
+    color:#fff;
+}
+.textExample h3{
+    text-align:center;
+    margin:10% 0;
+}
+/*end of Map section*/
+/*starting stylesheet just for mozilla */
+@-moz-document url-prefix() {
+    .upperNav ul li{
+        width:10em;
+    }
+    .upperNav ul li span img{
+        height:auto;
+        width:2em;
+    }
+    .clients{
+        text-align: center;
+    }
+} 
+@media only screen and (max-width: 990px) {
+    .main{
+        height:50%;
+    }
+    .mainFrame h1{
+        margin-top:6em;
+    }
+    .mobileForm{
+        display:block
+    }
+    .notShow{
+        display:none;
+    }
+    .details{
+        height:100%;
+    }
+    .contactus{
+        height:85%;
+    }
+    .social ul{
+        padding:0;
+    }
+    #logo{
+        width:100%;
+        height:auto;
+    }
+    .mizan img{
+        margin-top:0;
+    }
+}
+@media only screen and (max-width: 770px) {
+    .serviceUnitMobile{
+        font-size:12px;
+    }
+    .notVisible{
+        display:none;
+    }
+    header{
+        display:none;
+    }
+    .logoAbout img{
+        display:none;
+    }
+    .arrow{
+        top:38%;
+    }
+    .serviceContainer{
+        display:none;
+    }
+    nav{
+        display:block;
+    }
+    .info ul{
+        text-align:left;
+        padding-left:10em;
+        list-style-type: none;
+    }
+    .projects{
+        position:static;
+        float:left;
+    }
+    .info ul{
+        padding:0 !important;
+    }
+    .info ul li{
+        text-align:center;
+    }
+    .textExample{
+        padding:20% 0;
+    }
+    .textExample h3{
+        margin:0;
+    }
+    .mainFrame{
+        background-size:140% 115% !important;
+    }
+}
+@media screen and (max-width: 770px) and (min-width: 420px){
+    .projects{
+        padding: 3% 20%;
+    }
+}
+@media screen and (max-width: 420px) and (max-height: 740px){
+    .head h1{
+        font-size:23px;
+    }
+    .skrewedPart {
+        height: 57%;
+        width:120%;
+    }
+    .hiddenBar{
+        width: 64.3%;
+        top:8%;
+    }
+    nav{
+        height:8%;
+    }
+    .clients img{
+        width:100%;
+    }
+    .clients{
+        height:16%;
+    }
+    .main{
+        background-size: 140% 130%;
+        height: 40%;
+    }
+    .caption p{
+        text-align: center;
+    }
+    .mainFrame h1 {
+        margin-top: 4em;
+    }
+    .modal-lg{
+        width:95%;
+    }
+    .modal { 
+        position: fixed; 
+        top: 3%; 
+        right: 3%; 
+        left: 3%; 
+        width: auto; 
+        margin: 0; 
+    }
+    .modal-body { 
+        height: 70%; 
+        overflow: hidden;
+    }
+    .modal-body img{
+        width:auto;
+        height:100%;
+        margin-left:-75%;
+    }
+    .arrow{
+        width:20%;
+        top:0%;
+    }
+}
+/*#203648*/

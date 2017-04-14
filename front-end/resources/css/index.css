@@ -1,0 +1,346 @@
+@font-face {
+    font-family: Ubuntu;
+    src: url(../fonts/Ubuntu-R.ttf);
+}
+*{
+    font-family: Ubuntu;
+}
+.servicesSectionMobile{
+    display:none;
+}
+/*main section*/
+main{
+    height:85%;
+    width:100%;
+    background: url("../img/front.jpg") no-repeat fixed center;
+    background-size:100% 130%;
+}
+.mainFrame{
+    width:100%;
+    height:100%;
+    background-color:rgba(34,57,76,0.9);
+    display:table;
+}
+.headlight{
+    display: table-cell;
+    vertical-align: middle;
+    height:640px
+}
+.head{
+    text-align: center;
+    margin:0 auto;
+    float:none;
+    color:#fff;
+    border:1pt solid #fff;
+}
+article{
+    height:auto;
+    width:100%;
+    padding:4% 0;
+    background:url('../img/logobackground.svg')no-repeat  center;
+    background-size:50% 50%;
+    background-position-y: 60%;
+}
+article p{
+    text-align: justify;
+}
+article h3{
+    text-align:center;
+}
+.opacity{
+    background-color:rgba(255,255,255,.7);
+}
+.howWeDo p{
+    text-align:justify;
+    margin-bottom:0 !important;
+}
+.howWeDo ul{
+    margin:0;
+}
+.logoAbout{
+    text-align:center;
+}
+.logoAbout h4{
+    margin-bottom: 0;
+}
+.logoAbout img{
+    margin:2% 0;
+    height:13%;
+    width:auto;
+}
+#hiddenDisplay{
+    color:#fff;
+}
+figure{
+    background-color:#22394C;
+    height:auto;
+    width:100%;
+    padding:5% 0;
+    color:#fff;
+}
+.servicesHead h1{
+    text-align: center;
+}
+.servicesSection{
+    padding:1% 0;
+    height:40%;
+}
+.serviceUnit{
+    /*float:left;
+    width:48%;*/
+    padding:2%;
+    margin:3%;
+    margin-top:1%;
+    background-color:#203648;
+    border:1pt solid gray;
+}
+.serviceUnit div p{
+    font-size:11px;
+}
+.serviceUnit div h4{
+    margin-top:0;
+}
+.serviceUnit div span{
+    font-size:28px;
+    color:red;
+    text-align:center;
+}
+.seviceIco{
+    padding:0;
+}
+.serviceIco img{
+    width:100%;
+    height:auto;
+    margin:5% 0;
+}
+.details{
+    width:100%;
+    height:auto;
+    background-color:#fff;
+}
+.team .row{
+    padding:5%;
+    
+}
+.team div h3{
+    text-align:center;
+    margin:20px 0;
+}
+.person img{
+    display:block;
+    margin:auto;
+    height:420px;
+    margin-bottom:3%;
+}
+.social{
+    background-color:#203648;
+    height:5%;
+    padding:0;
+}
+.social ul{
+    list-style-type: none;
+    margin: 0 auto;
+    padding:0 15%;
+    height:100%;
+}
+.social ul li {
+    height:100%;
+    width:23%;
+    display:inline-table;
+    text-align:center;
+    color:#fff;
+}
+.social ul li a{
+    display:table-cell;
+    vertical-align: middle;
+}
+.social ul li a img{
+    width:0.9em;
+    height:0.9em;
+}
+.clients{
+    height:25%;
+    display:table;
+    cursor: pointer;
+}
+.clients img{
+    display:table-cell;
+    vertical-align: middle;
+    margin:auto;
+    width:50%;
+    height:auto;
+}
+.stig img{
+    padding:10% 0;
+}
+.barbosa img{
+    padding:7% 0;
+}
+.mizan img{
+    height:60%;
+    margin-top:1.5em;
+}
+.proj{
+    width:75%;
+    height:auto;
+    display:block;
+    margin:auto;
+}
+.seeMore p{
+    padding-top:6.4em;
+}
+/*Map section*/
+.map div{
+    padding:0;
+
+}
+.map{
+    background-color:rgb(32,54,72);
+    overflow: hidden;
+}
+.divs{
+    padding:0;
+
+}
+.divs > div{
+    padding:0;
+}
+.info{
+    background-color:rgb(32,54,72);
+}
+.info ul{
+    text-align: center;
+    list-style-type: none;
+    margin: 1em auto;
+    font-size: 1.2em;
+    padding: 0;
+}
+.info ul li{
+    margin:2.3em 0;
+    color:#fff;
+}
+.info img{
+    height:20px;
+}
+.googleMap{
+    pointer-events:none;
+}
+.bootom{
+    padding:0 !important;
+}
+
+/*end of Map section*/
+.contactus{
+    
+    background-size:100% 100%;
+    background-position: center;
+    overflow: hidden;
+    height:auto;
+    width:100%;
+
+}
+.contactus .container-fluid{
+    width:100%;
+    height:auto;
+    background-color:rgba(34,57,76,0.9);
+    color:#fff;
+    padding:0;
+}
+.contactus .container-fluid .row{
+    padding: 0 0%;
+}
+.contactus h1{
+    text-align:center;
+    margin:5%;
+}
+.infoBackground{
+    height:auto;
+}
+.formContainer{
+    padding-right:0;
+    background:url("../img/world.svg") no-repeat fixed left;
+    background-position-x:-20%;
+}
+.input{
+    margin:1em;
+}
+.input:first-child{
+    margin-top:0;
+}
+.input:last-child{
+    margin-bottom:0;
+}
+input[type=text] {
+    width:100%;
+    background-color:transparent;
+    border:2pt solid #fff;
+    padding:12px 20px;
+}
+textarea{
+    width:100%;
+    height:14.5em;
+    background-color:transparent;
+    border:2pt solid #fff;
+    padding:12px 20px;
+    padding-bottom:0;
+}
+textarea::-webkit-input-placeholder{
+    color:#fff;
+}
+textarea::-moz-placeholder{
+    color:#fff;
+}
+textarea:-ms-input-placeholder{
+    color:#fff;
+}
+textarea:-moz-placeholder{
+    color:#fff;
+}
+
+input[type=text]::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  text-transform: uppercase;
+  color:#fff;
+}
+input[type=text]::-moz-placeholder { /* Firefox 19+ */
+  text-transform: uppercase;
+  color:#fff;
+}
+input[type=text]:-ms-input-placeholder { /* IE 10+ */
+  text-transform: uppercase;
+  color:#fff;
+}
+input[type=text]:-moz-placeholder { /* Firefox 18- */
+  text-transform: uppercase;
+  color:#fff;
+}
+.button{
+    margin:2% 0;
+    text-align: center;
+}
+.send{
+    padding:16px 20px;
+    font-size: 10px;
+}
+
+/*starting stylesheet just for mozilla */
+@-moz-document url-prefix() {
+    .upperNav ul li{
+        width:10em;
+    }
+    .upperNav ul li span img{
+        height:auto;
+        width:2em;
+    }
+    .socialNav{
+        width:1em;
+    }
+    article{
+        background-size:20em 22em;
+        background-position-y: 65%;
+    }
+    .clients{
+        text-align: center;
+    }
+}
+
+/*#203648*/

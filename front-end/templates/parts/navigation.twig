@@ -1,0 +1,90 @@
+        <header>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-sm-3" id="logoContainer">
+                            <img src="/front-end/resources/img/logo/logo3.svg" alt="" id="logo">
+                        </div>
+                        <div class="col-sm-9 navsContainer">
+                            <div class="col-md-12 upperNav">
+                                <ul>
+                                    <li class="socNavLi">
+                                        <span class="socialNav">
+                                            <img src="/front-end/resources/img/social/linked.svg" alt="">
+                                        </span>
+                                    </li>
+                                    <li class="socNavLi">
+                                        <span class="socialNav">
+                                            <img src="/front-end/resources/img/social/fb.svg" alt="">
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span>
+                                            <img src="/front-end/resources/img/navicons/placeholder.svg" alt="">
+                                            Novi Pazar
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span>
+                                            <img src="/front-end/resources/img/navicons/envelope.svg" alt="">
+                                            <a href="#contactUs" style="text-decoration: none; color:#fff;">Contact Us</a>
+                                        </span>
+                                    </li>
+                                </ul>
+
+                            </div>
+                            <div class="col-md-12 nav">
+                                <ul>
+                                    <li><a href="#" class="searchIco"><img src="/front-end/resources/img/flags/uk.png" alt=""></a></li>
+                                    <!--<li><a href="#">Team</a></li>-->
+                                    {% if page == 'projects' %}
+                                    <li><a href="#">Clients and Projects</a></li>
+                                    <li><a href="/">Services</a></li>
+                                    <li><a href="/">About Us</a></li>
+                                    <li><a href="/">Home</a></li>
+                                    {% endif %}
+                                    {% if page == 'index' %}
+                                    <li><a href="/projects">Clients and Projects</a></li>
+                                    <li><a href="#services">Services</a></li>
+                                    <li><a href="#aboutUs">About Us</a></li>
+                                    <li><a href="#mainFrame">Home</a></li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <nav>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-4 logo-container">
+                        <img src="/front-end/resources/img/logo/logo3.svg" alt="" id="navLogo">
+                    </div>
+                    <div class="col-xs-8">
+                        <div class="hamburger" onclick="showMenuBar()">
+                            <hr/>
+                            <hr/>
+                            <hr/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="hiddenBar">
+            <ul class="hidenBarList">
+                {% if page == 'projects' %}
+                <li><a href="#">Clients and Projects</a></li>
+                <li><a href="/">Services</a></li>
+                <li><a href="/">About Us</a></li>
+                <li><a href="/">Home</a></li>
+                {% endif %}
+                {% if page == 'index' %}
+                <li><a href="/projects">Clients and Projects</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#aboutUs">About Us</a></li>
+                <li><a href="#mainFrame">Home</a></li>
+                {% endif %}
+            </ul>
+        </div>
