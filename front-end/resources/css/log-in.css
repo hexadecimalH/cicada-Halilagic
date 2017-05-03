@@ -1,0 +1,27 @@
+
+/* setting height 100% */
+html, body {
+    height: 100%;
+    background-color:rgba(34,57,76,0.9);
+}
+.fill-height {
+    min-height: 100%;
+    height:auto !important; /* cross-browser */
+    height: 100%; /* cross-browser */
+    position:relative;
+}
+.row{
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.login{
+    text-align: center;
+}
+.login div{
+    margin:2% 0;
+}
+input{
+    color:#fff;
+}

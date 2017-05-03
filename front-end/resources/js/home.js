@@ -80,3 +80,9 @@ else if($('#hiddenMessage').text() == "We are sorry! There must be some technica
 // setting intervals 
 var projectPhotoInterval = window.setInterval(function(){changeProjPhoto()},5000);
 var sliderInterval = window.setInterval(function(){slide("right")},3000);
+
+// setting the first visible
+$(document).ready(function(){
+    var firstPic = $('.proj').first();
+    $(firstPic).removeClass('hidden');
+});

@@ -2,10 +2,16 @@
     .details{
         height:auto;
     }
+    .seeMore p {
+        padding-top: 2.4em !important;
+    }
 }
 @media only screen and (max-width: 990px) {
     .head h1{
         font-size: 15px;
+    }
+    .seeMore p {
+        padding-top: 2.4em !important;
     }
     article{
         height:auto;

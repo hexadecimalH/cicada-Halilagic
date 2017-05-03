@@ -11,17 +11,32 @@ class MainController
 {
     /** @var \Twig_Environment $twig */
     private $twig;
+    private $mainService;
 
-    public function __construct($twig)
+    public function __construct($twig, $mainService)
     {
         $this->twig = $twig;
+        $this->mainService = $mainService;
     }
 
     public function index(){
-        return $this->twig->render('index.twig', ['page' => 'index']);
+        $projectPics = $this->mainService->getProjectPics();
+        return $this->twig->render('index.twig', ['page' => 'index', 'pictures' => $projectPics ]);
     }
 
     public function projects(){
-        return $this->twig->render('projects.twig',['page' => 'projects']);
+        $projects = $this->mainService->getProjects();
+        return $this->twig->render('projects.twig',['page' => 'projects', 'projects' => $projects]);
+    }
+
+    public function sendMail(Application $app, Request $request){
+        $subject = $request->request->get('subject');
+        $content = $request->request->get('content');
+        $clientMail = $request->request->get('senderEmail');
+        $clientName = $request->request->get('name');
+        
+        $isSent = $this->mainService->sendMail($clientMail, $clientName, $subject, $content);
+
+        return ($isSent) ? "Thank you for contacting us will responed to you as soon as possible" : "Sorry we are having some issues with network please try again "; 
     }
 }

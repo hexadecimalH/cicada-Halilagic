@@ -1,0 +1,30 @@
+<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header" id="titleDivModal">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="titleModal" style="text-align:center; color:#000">Upload Images</h4>
+        </div>
+        <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body" id="modal-panel">
+                    
+                </div>
+            </div>
+            <form action="/upload/" method="POST" name="modal-form" enctype="multipart/form-data">
+                <div class="panel panel-default">
+                    <div class="panel-body upload-pannel">
+                        <button class="btn btn-primary upload" >Upload Pictures</button>
+                        <span class="upload-span"></span>
+                        <input type="file" class="hidden" id="upload" name="pics[]" multiple />
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="cancelUpload()">Cancel</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+        </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

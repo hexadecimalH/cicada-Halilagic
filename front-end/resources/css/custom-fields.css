@@ -1,0 +1,67 @@
+input[type=text] {
+    width:100%;
+    background-color:transparent;
+    border:2pt solid #fff;
+    padding:12px 20px;
+}
+input[type=password] {
+    width:100%;
+    background-color:transparent;
+    border:2pt solid #fff;
+    padding:12px 20px;
+}
+textarea{
+    width:100%;
+    height:14.5em;
+    background-color:transparent;
+    border:2pt solid #fff;
+    padding:12px 20px;
+    padding-bottom:0;
+}
+textarea::-webkit-input-placeholder{
+    color:#fff;
+}
+textarea::-moz-placeholder{
+    color:#fff;
+}
+textarea:-ms-input-placeholder{
+    color:#fff;
+}
+textarea:-moz-placeholder{
+    color:#fff;
+}
+
+input[type=text]::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  text-transform: uppercase;
+  color:#fff;
+}
+input[type=text]::-moz-placeholder { /* Firefox 19+ */
+  text-transform: uppercase;
+  color:#fff;
+}
+input[type=text]:-ms-input-placeholder { /* IE 10+ */
+  text-transform: uppercase;
+  color:#fff;
+}
+input[type=text]:-moz-placeholder { /* Firefox 18- */
+  text-transform: uppercase;
+  color:#fff;
+}
+
+input[type=password]::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  text-transform: uppercase;
+  color:#fff;
+}
+input[type=password]::-moz-placeholder { /* Firefox 19+ */
+  text-transform: uppercase;
+  color:#fff;
+}
+input[type=password]:-ms-input-placeholder { /* IE 10+ */
+  text-transform: uppercase;
+  color:#fff;
+}
+input[type=password]:-moz-placeholder { /* Firefox 18- */
+  text-transform: uppercase;
+  color:#fff;
+}
+

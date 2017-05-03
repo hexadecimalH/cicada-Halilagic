@@ -14,7 +14,9 @@
         "guzzlehttp/guzzle": "^6.2",
         "twig/twig": "~1.0",
         "robmorgan/phinx": "^0.8.0",
-        "php-activerecord/php-activerecord": "^1.1"
+        "php-activerecord/php-activerecord": "^1.1",
+        "eventviva/php-image-resize": "1.6.*",
+        "phpmailer/phpmailer": "^5.2"
     },
     "autoload": {
         "psr-4": {

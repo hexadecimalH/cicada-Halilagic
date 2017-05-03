@@ -9,9 +9,18 @@
         <title>Halilagic Consulting Group</title>
         
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/front-end/resources/css/custom-fields.css">
         <link rel="stylesheet" href="/front-end/resources/css/navigation.css">
         <link rel="stylesheet" href="/front-end/resources/css/footer.css">
-        <link rel="stylesheet" href="/front-end/resources/css/media-queries.css">
+        
+        <link rel="stylesheet" href="/front-end/resources/css/font.css">
+        {% if page == "admin-pannel" %}
+        <link rel="stylesheet" href="/front-end/resources/css/admin-pannel.css">
+        {% endif %}
+        {% if page == "login" %}
+        <link rel="stylesheet" href="/front-end/resources/css/log-in.css">
+        {% endif %}
+
         {% if page == "index" %}
         <link rel="stylesheet" href="/front-end/resources/css/index.css">
         {% endif %}
@@ -20,6 +29,7 @@
         <link rel="stylesheet" href="/front-end/resources/css/lightbox.min.css">
         <link rel="stylesheet" href="/front-end/resources/css/projects.css">    
         {% endif %}
+        <link rel="stylesheet" href="/front-end/resources/css/media-queries.css">
         <link rel="shortcut icon" href="/front-end/resources/img/favico/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/front-end/resources/img/favico/favicon.ico" type="image/x-icon">
         <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>

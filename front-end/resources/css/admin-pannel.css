@@ -1,0 +1,37 @@
+.admin-heading{
+    text-align:center;
+    background-color:rgba(34,57,76,0.5);
+    color:#fff;
+}
+
+.admin-heading h3{
+    margin: 4% 10%;
+}
+.thumbnail img{
+    width:400px;
+    height:180px;
+}
+.panel-heading h3{
+    text-align:center;
+}
+.caption p{
+    text-align: center;
+}
+.edit{
+    text-align:center;
+}
+.edit button{
+    width:400px;
+}
+.add{
+    float:right;
+}
+#delete{
+    float:left;
+}
+#background{
+    background-color:#d0ddf2;
+}
+#titleModal h4{
+    color:#000 !important;
+}

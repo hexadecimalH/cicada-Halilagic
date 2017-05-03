@@ -1,0 +1,65 @@
+{% include 'header.twig'%}
+    <body>
+    {% include 'parts/navigation.twig' %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 admin-heading">
+                <h3>Admin Panel</h3>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid" id="proj-container">
+        {% for project in projects %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3>
+                    <button class="btn btn-danger" id="delete" data-proj-id="{{project['id']}}" data-title="{{project['title']}}">Delete</button>
+                   <span class="headline" > {{project['title']}}</span>
+                    <button class="btn btn-success add" data-proj-id="{{project['id']}}" data-title="{{project['title']}}">Add</button>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div class="row" data-container-pic="{{project['id']}}">
+                {% for picture in project['project_pics'] %}
+                    <div class="col-sm-2">
+                        <div class="thumbnail">
+                            <img src="{{picture['url']}}" alt="...">
+                            <div class="caption">
+                                <p>
+                                    <a href="#" class="btn btn-danger delete" role="button" data-proj-id="{{project['id']}}" data-pic-id="{{picture['id']}}">Delete</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+            <div class="panel-footer">
+                <form action="">
+                    <p>{{project['about']}}</p>
+                    <textarea name="about" class="hidden">{{project['about']}}</textarea>
+                    <p class="edit">
+                        <button class="btn btn-success" onclick="toEditMode(event)"> Edit</button>
+                        <button class="btn btn-success hidden" onclick="saveChanges(event)" data-id="{{project['id']}}"> Save</button>
+                        <button class="btn btn-primary hidden" onclick="cancelChanges(event)"> Cancel</button>
+                    </p>
+                </form>
+            </div>        
+        </div>
+        {% endfor %}
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="caption">
+                <p>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#newProject">Create New Project</button>
+                </p>
+            </div>
+        </div>
+    </div>
+    {% include 'parts/admin-modal.twig' %}
+    {% include 'parts/admin-new-project-modal.twig' %}
+    {% include 'parts/footer.twig'%} 
+    <script src="/front-end/resources/js/admin-script.js"></script>
+    </body>
+</html>

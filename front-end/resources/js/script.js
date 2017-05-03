@@ -31,5 +31,8 @@ function showMenuBar(){
     var display = $('.hiddenBar').css('display');
     (display == 'block')? $('.hiddenBar').slideUp() : $('.hiddenBar').slideDown();
     // $('.hiddenBar').css('display', (display == 'block')? 'none':'block');
+}
+
+function sendMail(){
     
 }

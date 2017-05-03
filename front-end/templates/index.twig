@@ -4,7 +4,7 @@
             $message = $_GET['message'];
             echo '<p class="hidden" id="hiddenMessage">'.$message.'</p>';
         ?>-->
-        {% include 'parts/navigation.twig'%}
+        {% include 'parts/navigation.twig' %}
        <main id="mainFrame">
             <div class="container-fluid mainFrame">
                     <img src="/front-end/resources/img/arrow.svg" alt="" class="arrow" id="left" onclick="slide('left')">
@@ -240,15 +240,15 @@
                     <div class="col-sm-12">
                         <h3>Our Latest Projects</h3>
                         <div class="col-sm-7 projects">
-                            <img src="/front-end/resources/img/projects/interior/proj1/1.jpg" alt="" class="proj" >
-                            <img src="/front-end/resources/img/projects/interior/proj1/2.jpg" alt="" class="hidden proj">
-                            <img src="/front-end/resources/img/projects/interior/proj1/3.jpg" alt="" class="hidden proj">
-                            <img src="/front-end/resources/img/projects/interior/proj1/4.jpg" alt="" class="hidden proj">
+                        {{pictures.name|first}}
+                        {% for picture in pictures %}
+                            <img src={{picture.url}} alt="" class="proj hidden">
+                        {% endfor %}
                         </div>
                         <div class="col-sm-5 seeMore">
                             <p>
                                 Provision of high quality projects is vital for us, yet we very much appreciate your critique, it helps us improve into a more successful family business.
-                                We would like you to focus your attention in our latest projects. For more information <a href="pages/projects/index.html">click here</a>
+                                We would like you to focus your attention in our latest projects. For more information <a href="/projects">click here</a>
                             </p>
                         </div>
                     </div>
@@ -275,17 +275,17 @@
                         <div class="infoBackground">
                             <h1>Contact Us</h1>
                             
-                            <form method="post" action="mail.php" accept-charset="iso-8859-1">
+                            <form method="post" action="/mail" accept-charset="iso-8859-1">
                                 <div class="col-sm-12 notShow">
                                     <div class="col-md-6">
                                         <div class="col-sm-12 input">
-                                            <input type="text" placeholder="your name" name="name">
+                                            <input type="text" placeholder="your name" name="name" id="name">
                                         </div>
                                         <div class="col-sm-12 input">
                                             <input type="text" placeholder="your e-mail" id="senderEmail" name="senderEmail">
                                         </div>
                                         <div class="col-sm-12 input">
-                                            <input type="text" placeholder="subject" name="subject">
+                                            <input type="text" placeholder="subject" name="subject" id="subj">
                                         </div>
                                     </div>
                                     <div class="col-md-6 area">
@@ -335,7 +335,7 @@
                     </div>
                 </div>
                 <div class="col-sm-12 mobileForm">
-                    <form method="post" action="mail.php" accept-charset="iso-8859-1">
+                    <form method="post" action="/mail" accept-charset="iso-8859-1">
                         <div class="col-sm-12 input">
                             <input type="text" placeholder="your name" name="name">
                         </div>

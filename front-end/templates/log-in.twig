@@ -1,0 +1,24 @@
+{% include 'header.twig'%}
+    <body>
+        <div class="container fill-height">
+            <div class="row">
+                <div class="col-sm-12 login">
+                    <form action="/login" method="POST">
+                        <div class="col-xs-12">
+                            <img src="/front-end/resources/img/logo/logoW.svg" alt="">
+                        </div>
+                        <div class="col-xs-12">
+                            <input type="text" placeholder="username" name="username">
+                        </div>
+                        <div class="col-xs-12">
+                            <input type="password" placeholder="password" name="password">
+                        </div>
+                        <div class="col-xs-12">
+                            <button type="submit" class="btn btn-default">Log In</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
