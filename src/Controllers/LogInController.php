@@ -22,7 +22,7 @@ class LogInController
     }
 
     public function logIn(){
-        return $this->twig->render('log-in.twig', ['page' => 'login']);
+        return $this->twig->render('log-in.twig', ['page' => 'login', 'message' => '']);
     }
 
     public function checkCredentials(Application $app, Request $request){
@@ -33,6 +33,14 @@ class LogInController
         
         if(!empty($user)){
             $projects = $this->logInService->getProjects();
+            foreach($projects as &$project){
+                $project['has_thumb'] = false;
+                foreach($project['project_pics'] as $pic ){
+                    if($pic['type'] == 'thumb'){
+                        $project['has_thumb'] = true;
+                    }
+                }
+            }
             /** @var $session Session **/
             $session = new Session();
             $session->start();
@@ -41,6 +49,8 @@ class LogInController
             return $this->twig->render('admin-pannel.twig', ['page' => 'admin-pannel', 'projects' => $projects]);
         }
 
-        return $this->twig->render('log-in.twig', ['page' => 'login']);
+        return $this->twig->render('log-in.twig', ['page' => 'login', 'message' => 'Sorry ! You have entered wrong credentials' ]);
     }
+
+    
 }

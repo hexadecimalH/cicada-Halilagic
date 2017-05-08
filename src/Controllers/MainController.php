@@ -37,6 +37,6 @@ class MainController
         
         $isSent = $this->mainService->sendMail($clientMail, $clientName, $subject, $content);
 
-        return ($isSent) ? "Thank you for contacting us will responed to you as soon as possible" : "Sorry we are having some issues with network please try again "; 
+        return new Response($isSent);
     }
 }

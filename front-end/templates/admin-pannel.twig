@@ -21,12 +21,16 @@
             <div class="panel-body">
                 <div class="row" data-container-pic="{{project['id']}}">
                 {% for picture in project['project_pics'] %}
-                    <div class="col-sm-2">
-                        <div class="thumbnail">
+                    <div class="col-sm-3">
+                        <div class="{{picture['type']}} thumbnail" >
                             <img src="{{picture['url']}}" alt="...">
                             <div class="caption">
                                 <p>
                                     <a href="#" class="btn btn-danger delete" role="button" data-proj-id="{{project['id']}}" data-pic-id="{{picture['id']}}">Delete</a>
+                                    {% if project.has_thumb == false %}
+                                    <a href="#" class="btn btn-primary make-thumbnail" role="button" data-proj-id="{{project['id']}}" data-pic-id="{{picture['id']}}">Make Thumbnail</a>
+                                    {% endif %}
+                                    
                                 </p>
                             </div>
                         </div>

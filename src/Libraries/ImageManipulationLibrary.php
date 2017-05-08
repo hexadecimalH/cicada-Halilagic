@@ -28,4 +28,14 @@ class ImageManipulationLibrary
             'content' => $resizedBinaryContents
         ];
     }
+    public function resizeThumbnail($binaryContents){
+        $image = ImageResize::createFromString($binaryContents);
+        $image->resizeToWidth(300);
+        $resizedBinaryContents = $image->getImageAsString();
+        return [
+            'width' => $image->getDestWidth(),
+            'height' => $image->getDestHeight(),
+            'content' => $resizedBinaryContents
+        ];
+    }
 }

@@ -55,5 +55,10 @@ class AdminController
         
     }
 
+    public function makeThumbnail(Application $app, Request $request, $pictureId){
+        $image = $this->adminService->makeThumb($pictureId);
+        var_dump($image);die();
+    }
+
 
 }

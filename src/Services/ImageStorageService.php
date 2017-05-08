@@ -48,6 +48,17 @@ class ImageStorageService
         return $url;
     }
 
+    public function makeThumb($title, $picture){
+        $image = $this->imageManipulationLibrary->resizeThumbnail(file_get_contents($this->protocol.$this->domain.$picture->url));
+        $imageName = explode('/', $picture->url);
+        $path = '/uploads'.'/'.$title.'/thumb'.'/'.$imageName[3];
+        if(!file_exists($this->basePath.'/uploads'.'/'.$title.'/thumb'.'/')){
+            mkdir($this->basePath.'/uploads'.'/'.$title.'/thumb'.'/', 0777, true);
+        }
+        $path = $this->storeImageContents($path, $image['content']);
+        return $path;
+    }
+
     private function storeImageContents($path, $content){
         file_put_contents($this->basePath.$path, $content);
         return $path;

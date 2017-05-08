@@ -32,7 +32,3 @@ function showMenuBar(){
     (display == 'block')? $('.hiddenBar').slideUp() : $('.hiddenBar').slideDown();
     // $('.hiddenBar').css('display', (display == 'block')? 'none':'block');
 }
-
-function sendMail(){
-    
-}

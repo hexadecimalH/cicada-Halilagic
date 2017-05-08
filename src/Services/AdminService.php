@@ -57,8 +57,28 @@ class AdminService
 
     public function deleteProject($projectId){
         $project = Project::find($projectId);
-        // ProjectPic::find('')
+        $pictures = ProjectPic::all(['conditions' => ['project_id' , $project->id]]);
+        foreach($pictures as $picture){
+            $this->imageStorageService->removeContent($picture->url);
+            $picture->delete();
+        }
         $project->delete();
+    }
+
+    public function makeThumb($id){
+        $picture = ProjectPic::find($id);
+        $proj = Project::find($picture->project_id);
+        $title = str_replace(" ", "", $proj->title);
+        $resizedImagePath = $this->imageStorageService->makeThumb(strtolower($title),$picture);
+        $this->imageStorageService->removeContent($picture->url);
+        $picture->delete();
+
+        $thumbImage = ProjectPic::create(['project_id'=> $proj->id,
+                            'url' => $resizedImagePath,
+                            'type'=> 'thumb',
+                            'data_title' => 'Interior Design',
+                            'data_light_box' => $proj->title]);
+        return $thumbImage;
     }
 
 }

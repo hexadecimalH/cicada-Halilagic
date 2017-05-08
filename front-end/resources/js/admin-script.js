@@ -216,8 +216,18 @@ function createPannel(project){
     $("#proj-container").append(html);
 
 }
+$('a.make-thumbnail').on('click', function(){
+    var id = $(this).attr('data-pic-id');
+    var projId = $(this).attr('data-proj-id');
+    var self = this;
+    $.post('/make-thumbnail/'+id).done(function(data){
+        $(self).parent().parent().parent().addClass('thumb');
+        $('a.make-thumbnail[data-proj-id="'+projId+'"]').hide();
+    });
+});
 $(document).on('click','#delete',function(e){
     e.stopPropagation();
+    
     var button = e.target;
     var projId = $(button).attr('data-proj-id');
     $.post('/project/'+projId).done(function(){

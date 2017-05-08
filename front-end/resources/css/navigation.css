@@ -160,12 +160,12 @@ header div{
     padding-left:60px !important;
 }
 
-@media only screen and (max-height: 640px) and (max-width: 520px) {
+@media only screen and (max-width: 640px){
     .hamburger{
-        width:22px;
+        width:34px;
     }
     hr{
-        margin-top:7px;
+        margin-top:10px;
         margin-bottom:7px;
     }
 }

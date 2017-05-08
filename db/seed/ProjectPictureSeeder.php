@@ -45,7 +45,7 @@ class ProjectPictureSeeder extends AbstractSeed
             ],
             [
                 'project_id'    => 1,
-                'url' => '/uploads/uptown/thumb/1.jpg',
+                'url' => '/uploads/barbosa/thumb/1.png',
                 'type' => 'thumb',
                 'data_title' => 'Interior Design',
                 'data_light_box' => 'Up Town'
@@ -80,7 +80,7 @@ class ProjectPictureSeeder extends AbstractSeed
             ],
             [
                 'project_id'    => 2,
-                'url' => '/uploads/uptown/thumb/2.jpg',
+                'url' => '/uploads/uptown/thumb/1.png',
                 'type' => 'thumb',
                 'data_title' => 'Interior Design',
                 'data_light_box' => 'Barbosa'

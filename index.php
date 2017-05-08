@@ -24,30 +24,32 @@ function getProtocol()
 $app = new Application($_SERVER['HOME'], $_SERVER['HTTP_HOST'], getProtocol().'://');
 
 // Controllers
+$adminController = new AdminController($app['adminService']);
 $mainController = new MainController($app['twig'], $app['mainService']);
-$logInController = new LogInController($app['twig']);
+$logInController = new LogInController($app['twig'], $app['logInService']);
 /** @var RouteCollection $adminCollection */
 $logInCollection = $app['collection_factory'];
 $logInCollection->after([Authentication::class,'authenticate']);
 
 //Log In Controller routes
-$logInCollection->get('/login',         [LogInController::class, 'logIn']);
-$logInCollection->post('/login',        [LogInController::class, 'checkCredentials']);
+$app->get('/login',         [$logInController, 'logIn']);
+$app->post('/login',        [$logInController, 'checkCredentials']);
 
 //Main Controller routes
-$app->get('/',                          [ MainController::class, 'index']);
-$app->get('/projects',                  [ MainController::class, 'projects']);
-$app->post('/mail',                     [ MainController::class, 'sendMail']);
+$app->get('/',                          [ $mainController, 'index']);
+$app->get('/projects',                  [ $mainController, 'projects']);
+$app->post('/mail',                     [ $mainController, 'sendMail']);
 
 //Admin Controller routes
-$app->post('/upload/{projectId}',       [AdminController::class, 'uploadPictures']);
-$app->post('/delete/{pictureId}',       [AdminController::class, 'deletePicture']);
-$app->post('/cancel',                   [AdminController::class, 'cancelUploads']);
-$app->post('/update-about/{projectId}', [AdminController::class, 'updateProjectAbout']);
-$app->post('/project',                  [AdminController::class, 'createProject']);
-$app->post('/project/{projectId}',      [AdminController::class, 'deleteProject']);
+$app->post('/upload/{projectId}',           [$adminController, 'uploadPictures']);
+$app->post('/delete/{pictureId}',           [$adminController, 'deletePicture']);
+$app->post('/cancel',                       [$adminController, 'cancelUploads']);
+$app->post('/update-about/{projectId}',     [$adminController, 'updateProjectAbout']);
+$app->post('/project',                      [$adminController, 'createProject']);
+$app->post('/project/{projectId}',          [$adminController, 'deleteProject']);
+$app->post('/make-thumbnail/{pictureId}',   [$adminController, 'makeThumbnail']);
 
-$app->addRouteCollection($logInCollection);
+// $app->addRouteCollection($logInCollection);
 
 $app->exception(function(Exception $e, Request $request) {
     print_r($e->getMessage());

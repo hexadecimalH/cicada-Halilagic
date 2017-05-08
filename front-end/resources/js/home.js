@@ -63,20 +63,6 @@ function showMenuBar(){
     var display = $('.hiddenBar').css('display');
     (display == 'block')? $('.hiddenBar').slideUp() : $('.hiddenBar').slideDown();
 }
-
-//function for printing message after sending PHPMailer
-if($('#hiddenMessage').text() == "Your e-mail has been succesfully sent. We will contact you as soon as possible. "){
-    $('#myModal').modal('show');
-    $('#modalTxt').text($('#hiddenMessage').text());   
-    $('#titleModal').text('Thank you for contacting us');
-    $('#titleDivModal').css('background-color','#22394C');
-}
-else if($('#hiddenMessage').text() == "We are sorry! There must be some technical issues, please try contacting us again or directly to our e-mail address <b>info@hcg.rs</b>"){
-    $('#myModal').modal('show');
-    $('#modalTxt').text($('#hiddenMessage').text());   
-    $('#titleModal').text('Thank you for contacting us');
-    $('#titleDivModal').css('background-color','red');
-}
 // setting intervals 
 var projectPhotoInterval = window.setInterval(function(){changeProjPhoto()},5000);
 var sliderInterval = window.setInterval(function(){slide("right")},3000);
@@ -86,3 +72,33 @@ $(document).ready(function(){
     var firstPic = $('.proj').first();
     $(firstPic).removeClass('hidden');
 });
+
+$('button.send').on('click', function(e){
+    e.preventDefault();
+    sendMail();
+});
+function sendMail(){
+    var data = new FormData();
+    data.append('subject', $('.subj:visible').val())
+    data.append('content', $('.content:visible').val())
+    data.append('senderEmail', $('.senderEmail:visible').val())
+    data.append('name', $('.name:visible').val());
+    $.ajax({
+        url: "/mail",
+        type: 'POST',
+        data: data,
+        cache: false,
+        contentType: false,
+        processData: false
+    }).done(function(data){
+        var isSent = data.includes('smtp.gmail.com at your service');
+        showModalWithMessage(isSent);
+    });
+}
+
+function showModalWithMessage(isSent){
+    $('#myModal').modal('show');
+    $('#modalTxt').text((isSent) ? "Your e-mail has been succesfully sent. We will contact you as soon as possible. " : "We are sorry! There must be some technical issues, please try contacting us again or directly to our e-mail address <b>info@hcg.rs</b>");   
+    $('#titleModal').text('Thank you for contacting us');
+    $('#titleDivModal').css('background-color','#22394C');
+}

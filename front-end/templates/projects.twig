@@ -15,14 +15,14 @@
                             <div class="thumbnail">
                                 <div>
                                 {% for picture in project['project_pics'] %}
-                                    {% if picture['type'] == 'thumb' %}
-                                    <a class="example-image-link" href={{picture['url']}} data-lightbox={{picture['data_light_box']}} data-title={{picture['data_title']}}>
-                                        <img class="example-image" src={{picture['url']}} alt=""/>
-                                    </a>
-                                    {% endif %}
                                     {% if picture['type'] == 'normal' %}
                                     <a class="example-image-link" href={{picture['url']}} data-lightbox={{picture['data_light_box']}} data-title={{picture['data_title']}}>
                                         <img class="example-image hidden" src={{picture['url']}} alt=""/>
+                                    </a>
+                                    {% endif %}
+                                    {% if picture['type'] == 'thumb' %}
+                                    <a class="example-image-link" href={{picture['url']}} data-lightbox={{picture['data_light_box']}} data-title={{picture['data_title']}} >
+                                        <img class="example-image" src={{picture['url']}} alt=""/>
                                     </a>
                                     {% endif %}
                                  {% endfor %}
