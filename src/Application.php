@@ -26,7 +26,7 @@ class Application extends \Cicada\Application
         $this->protocol = $protocol;
         $this->basePath = $configPath;
         // session_start();
-        $this->configure($configPath.'Config/');
+        $this->configure($configPath.'config/halilagic/');
         $this->setupLibraries();
         $this->setupServices();
         $this->setupTwig();
