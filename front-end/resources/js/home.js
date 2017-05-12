@@ -102,3 +102,6 @@ function showModalWithMessage(isSent){
     $('#titleModal').text('Thank you for contacting us');
     $('#titleDivModal').css('background-color','#22394C');
 }
+$('ul.hidenBarList li a').on('click',function(){
+     $('.hiddenBar').slideUp();
+}); 
