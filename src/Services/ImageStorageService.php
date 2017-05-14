@@ -17,7 +17,7 @@ class ImageStorageService
     {
         $this->domain = $domain;
         $this->protocol = $protocol;
-        $this->basePath = $basePath.'Halilagic';
+        $this->basePath = $basePath;
         $this->imageManipulationLibrary = $imageManipulationLibrary;
     }
    
@@ -38,7 +38,7 @@ class ImageStorageService
 
             // Store to disk
             $path = $this->basePath.'/'.$title.'/'.$imageName;
-            if(!file_exists($this->basePath.'/uploads\/'.$title)){
+            if(!file_exists($this->basePath.'/uploads'.'/'.$title)){
                 mkdir($this->basePath.'/uploads'.'/'.$title, 0777, true);
             }
             $path = $this->storeImageContents('/uploads'.'/'.$title.'/'.$imageName, file_get_contents($image->getRealPath()));
