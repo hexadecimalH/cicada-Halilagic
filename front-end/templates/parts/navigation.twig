@@ -3,7 +3,9 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="col-sm-3" id="logoContainer">
-                            <img src="/front-end/resources/img/logo/logo3.svg" alt="" id="logo">
+                            <a href="{{ language == "en" ? "/en" : "/srb"}}">
+                                <img src="/front-end/resources/img/logo/logo3.svg" alt="" id="logo">
+                            </a>
                         </div>
                         <div class="col-sm-9 navsContainer">
                             <div class="col-md-12 upperNav">
@@ -27,7 +29,7 @@
                                     <li>
                                         <span>
                                             <img src="/front-end/resources/img/navicons/envelope.svg" alt="">
-                                            <a href="#contactUs" style="text-decoration: none; color:#fff;">Contact Us</a>
+                                            <a href="#contactUs" style="text-decoration: none; color:#fff;">{{ language == "en" ? "Contact Us" : "Kontakt"}}</a>
                                         </span>
                                     </li>
                                 </ul>
@@ -35,25 +37,28 @@
                             </div>
                             <div class="col-md-12 nav">
                                 <ul>
-                                    <li><a href="#" class="searchIco"><img src="/front-end/resources/img/flags/uk.png" alt=""></a></li>
+                                    
                                     <!--<li><a href="#">Team</a></li>-->
                                     {% if page == 'projects' %}
-                                    <li><a href="#">Clients and Projects</a></li>
-                                    <li><a href="/">Services</a></li>
-                                    <li><a href="/">About Us</a></li>
-                                    <li><a href="/">Home</a></li>
+                                    <li><a href="{{language == "en" ? "projects/srb" : "projects/en" }}" class="searchIco"><img src="{{ language == "en" ? "/front-end/resources/img/flags/srb.png" : "/front-end/resources/img/flags/uk.png" }}" alt=""></a></li>
+                                    <li><a href="#">{{ language == "en" ? "Clients and Projects" : "Klienti i Projekti"}}</a></li>
+                                    <li><a href="/">{{ language == "en" ? "Services" : "Usloge"}}</a></li>
+                                    <li><a href="/">{{ language == "en" ? "About Us" : "O nama"}}</a></li>
+                                    <li><a href="/">{{ language == "en" ? "Home" : "Pocetna"}}</a></li>
                                     {% endif %}
                                     {% if page == 'index' %}
-                                    <li><a href="/projects">Clients and Projects</a></li>
-                                    <li><a href="#services">Services</a></li>
-                                    <li><a href="#aboutUs">About Us</a></li>
-                                    <li><a href="#mainFrame">Home</a></li>
+                                    <li><a href="{{language == "en" ? "/srb" : "/en" }}" class="searchIco"><img src="{{ language == "en" ? "/front-end/resources/img/flags/srb.png" : "/front-end/resources/img/flags/uk.png" }}" alt=""></a></li>
+                                    <li><a href="{{ language == "en" ? "projects/en" : "projects/srb"}}">{{ language == "en" ? "Clients and Projects" : "Klienti i Projekti"}}</a></li>
+                                    <li><a href="#services">{{ language == "en" ? "Services" : "Usloge"}}</a></li>
+                                    <li><a href="#aboutUs">{{ language == "en" ? "About Us" : "O nama"}}</a></li>
+                                    <li><a href="#mainFrame">{{ language == "en" ? "Home" : "Pocetna"}}</a></li>
                                     {% endif %}
                                     {% if page == 'admin-pannel' %}
-                                    <li><a href="/projects">Clients and Projects</a></li>
-                                    <li><a href="/">Services</a></li>
-                                    <li><a href="/">About Us</a></li>
-                                    <li><a href="/">Home</a></li>
+                                    <li><a href="#" class="searchIco"><img src="{{ language == "en" ? "/front-end/resources/img/flags/srb.png" : "/front-end/resources/img/flags/uk.png" }}" alt=""></a></li>
+                                    <li><a href="{{ language == "en" ? "projects/en" : "projects/srb"}}">{{ language == "en" ? "Clients and Projects" : "Klienti i Projekti"}}</a></li>
+                                    <li><a href="/">{{ language == "en" ? "Services" : "Usloge"}}</a></li>
+                                    <li><a href="/">{{ language == "en" ? "About Us" : "O nama"}}</a></li>
+                                    <li><a href="/">{{ language == "en" ? "Home" : "Pocetna"}}</a></li>
                                     {% endif %}
                                 </ul>
                             </div>
@@ -81,16 +86,18 @@
         <div class="hiddenBar">
             <ul class="hidenBarList">
                 {% if page == 'projects' %}
-                <li><a href="#">Clients and Projects</a></li>
-                <li><a href="/">Services</a></li>
-                <li><a href="/">About Us</a></li>
-                <li><a href="/">Home</a></li>
+                <li><a href="#">{{ language == "en" ? "Clients and Projects" : "Klienti i Projekti"}}</a></li>
+                <li><a href="{{ language == "en" ? "/en" : "/srb"}}">{{ language == "en" ? "Services" : "Usloge"}}</a></li>
+                <li><a href="{{ language == "en" ? "/en" : "/srb"}}">{{ language == "en" ? "About Us" : "O nama"}}</a></li>
+                <li><a href="{{ language == "en" ? "/en" : "/srb"}}">{{ language == "en" ? "Home" : "Pocetna"}}</a></li>
+                <li><a href="{{language == "en" ? "projects/srb" : "projects/en" }}" class="searchIco-nav"><img src="{{ language == "en" ? "/front-end/resources/img/flags/srb.png" : "/front-end/resources/img/flags/uk.png" }}" alt=""></a></li>
                 {% endif %}
                 {% if page == 'index' %}
-                <li><a href="/projects">Clients and Projects</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#aboutUs">About Us</a></li>
-                <li><a href="#mainFrame">Home</a></li>
+                <li><a href="{{ language == "en" ? "projects/en" : "projects/srb"}}">{{ language == "en" ? "Clients and Projects" : "Klienti i Projekti"}}</a></li>
+                <li><a href="#services">{{ language == "en" ? "Services" : "Usloge"}}</a></li>
+                <li><a href="#aboutUs">{{ language == "en" ? "About Us" : "O nama"}}</a></li>
+                <li><a href="#mainFrame">{{ language == "en" ? "Home" : "Pocetna"}}</a></li>
+                <li><a href="{{language == "en" ? "/srb" : "/en" }}" class="searchIco-nav"><img src="{{ language == "en" ? "/front-end/resources/img/flags/srb.png" : "/front-end/resources/img/flags/uk.png" }}" alt=""></a></li>
                 {% endif %}
             </ul>
         </div>

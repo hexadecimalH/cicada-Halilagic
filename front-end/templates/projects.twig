@@ -1,12 +1,12 @@
 {% include 'header.twig'%}
     <body>
-        {% include 'parts/navigation.twig'%}
+        {% include 'parts/navigation.twig' with {'language': language } %}
         <main>
             <div class="container-fluid">
                 <div class="row">
                     <div class="main">
                         <div class="mainFrame">
-                            <h1>Our Projects</h1>
+                            <h1>{{ language == "en" ? "Our Projects" : "Projekti"}}</h1>
                         </div>
                     </div>
                     {% for project in projects %}
@@ -34,7 +34,7 @@
                         </div>
                         <div class="col-sm-8 text">
                             <h3>{{ project['title'] }}</h3>
-                            <p>{{ project['about'] }}</p>
+                            <p>{{language == 'en' ? project['aboutenglish'] : project['about'] }}</p>
                         </div>
                         </div>
                         {% endfor %}

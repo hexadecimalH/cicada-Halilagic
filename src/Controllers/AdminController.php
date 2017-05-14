@@ -37,9 +37,9 @@ class AdminController
         $this->adminService->cancelImageUpload($images);
     }
 
-    public function updateProjectAbout(Application $app, Request $request, $projectId){
+    public function updateProjectAbout(Application $app, Request $request, $projectId, $language){
         $text = $request->request->get('text');
-        $this->adminService->updateAboutSection($projectId, $text);
+        $this->adminService->updateAboutSection($projectId, $text, $language);
     }
 
     public function createProject(Application $app, Request $request){

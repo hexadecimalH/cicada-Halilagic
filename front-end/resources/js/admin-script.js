@@ -32,12 +32,13 @@ function cancelChanges($e){
 function saveChanges($e){
     $e.preventDefault();
     var button = $e.target;
+    var lang = $(button).attr('data-lang');
     var text = $($e.target).parent().prev().val();
     var data = new FormData();
     data.append('text',text);
     var projId = $(button).data('id');  
     $.ajax({
-        url: "/update-about/"+projId,
+        url: "/update-about/"+projId+"/"+lang,
         type: 'POST',
         data: data,
         cache: false,

@@ -28,7 +28,8 @@ class LogInController
     public function checkCredentials(Application $app, Request $request){
         $username = $request->request->get('username');
         $password = $request->request->get('password');
-        
+        $language = $request->request->get('language');
+
         $user = $this->logInService->validateCredentials($username, $password);
         
         if(!empty($user)){
@@ -46,7 +47,7 @@ class LogInController
             $session->start();
             $session->set('user',$user);
             $session->save();
-            return $this->twig->render('admin-pannel.twig', ['page' => 'admin-pannel', 'projects' => $projects]);
+            return $this->twig->render('admin-pannel.twig', ['page' => 'admin-pannel', 'projects' => $projects, 'language' => $language]);
         }
 
         return $this->twig->render('log-in.twig', ['page' => 'login', 'message' => 'Sorry ! You have entered wrong credentials' ]);

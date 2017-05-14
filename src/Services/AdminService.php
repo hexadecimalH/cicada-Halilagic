@@ -43,9 +43,15 @@ class AdminService
         }
     }
 
-    public function updateAboutSection($id, $text){
+    public function updateAboutSection($id, $text, $language){
         $project = Project::find($id);
-        $project->about = $text;
+        if($language == "en"){
+            $project->aboutenglish = $text;
+        }
+        else{
+            $project->about = $text;
+        }
+        
         $project->save();
     }
 

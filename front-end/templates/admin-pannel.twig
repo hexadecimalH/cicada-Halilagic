@@ -1,6 +1,6 @@
 {% include 'header.twig'%}
     <body>
-    {% include 'parts/navigation.twig' %}
+    {% include 'parts/navigation.twig' with {'language' : language }%}
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12 admin-heading">
@@ -40,11 +40,11 @@
             </div>
             <div class="panel-footer">
                 <form action="">
-                    <p>{{project['about']}}</p>
-                    <textarea name="about" class="hidden">{{project['about']}}</textarea>
+                    <p>{{language == 'en' ? project['aboutenglish'] : project['about'] }}</p>
+                    <textarea name="about" class="hidden">{{language == 'en' ? project['aboutenglish'] : project['about'] }}</textarea>
                     <p class="edit">
                         <button class="btn btn-success" onclick="toEditMode(event)"> Edit</button>
-                        <button class="btn btn-success hidden" onclick="saveChanges(event)" data-id="{{project['id']}}"> Save</button>
+                        <button class="btn btn-success hidden" onclick="saveChanges(event)" data-id="{{project['id']}}" data-lang="{{language == 'en' ? 'en' : 'srb' }}"> Save</button>
                         <button class="btn btn-primary hidden" onclick="cancelChanges(event)"> Cancel</button>
                     </p>
                 </form>

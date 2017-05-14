@@ -36,18 +36,20 @@ $app->get('/login',         [$logInController, 'logIn']);
 $app->post('/login',        [$logInController, 'checkCredentials']);
 
 //Main Controller routes
-$app->get('/',                          [ $mainController, 'index']);
 $app->get('/projects',                  [ $mainController, 'projects']);
+$app->get('/projects/{language}',       [ $mainController, 'projectsBegin']);
+$app->get('/',                          [ $mainController, 'indexBegin']);
+$app->get('/{language}',                [ $mainController, 'index']);
 $app->post('/mail',                     [ $mainController, 'sendMail']);
 
 //Admin Controller routes
-$app->post('/upload/{projectId}',           [$adminController, 'uploadPictures']);
-$app->post('/delete/{pictureId}',           [$adminController, 'deletePicture']);
-$app->post('/cancel',                       [$adminController, 'cancelUploads']);
-$app->post('/update-about/{projectId}',     [$adminController, 'updateProjectAbout']);
-$app->post('/project',                      [$adminController, 'createProject']);
-$app->post('/project/{projectId}',          [$adminController, 'deleteProject']);
-$app->post('/make-thumbnail/{pictureId}',   [$adminController, 'makeThumbnail']);
+$app->post('/upload/{projectId}',                      [$adminController, 'uploadPictures']);
+$app->post('/delete/{pictureId}',                      [$adminController, 'deletePicture']);
+$app->post('/cancel',                                  [$adminController, 'cancelUploads']);
+$app->post('/update-about/{projectId}/{language}',     [$adminController, 'updateProjectAbout']);
+$app->post('/project',                                 [$adminController, 'createProject']);
+$app->post('/project/{projectId}',                     [$adminController, 'deleteProject']);
+$app->post('/make-thumbnail/{pictureId}',              [$adminController, 'makeThumbnail']);
 
 // $app->addRouteCollection($logInCollection);
 

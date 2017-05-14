@@ -16,7 +16,7 @@ class Project extends Model
 
     public function serialize(){
         return $this->to_array([
-            'only' => ['id', 'title','about'],
+            'only' => ['id', 'title','about', 'aboutenglish'],
             'include' => [ 'project_pics' => ['only' =>  ['id', 'url', 'type', 'data_light_box', 'data_title']]]
         ]);
     }

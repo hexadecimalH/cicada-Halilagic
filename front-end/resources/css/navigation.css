@@ -159,7 +159,12 @@ header div{
 .searchIco{
     padding-left:60px !important;
 }
-
+.searchIco-nav{
+    padding-left:0px;
+}
+.searchIco-nav img{
+    width: 10%;
+}
 @media only screen and (max-width: 640px){
     .hamburger{
         width:34px;

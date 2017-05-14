@@ -4,27 +4,27 @@
             $message = $_GET['message'];
             echo '<p class="hidden" id="hiddenMessage">'.$message.'</p>';
         ?>-->
-        {% include 'parts/navigation.twig' %}
+        {% include 'parts/navigation.twig' with {'language': language} %}
        <main id="mainFrame">
             <div class="container-fluid mainFrame">
                     <img src="/front-end/resources/img/arrow.svg" alt="" class="arrow" id="left" onclick="slide('left')">
                     <img src="/front-end/resources/img/arrow.svg" alt="" class="arrow" id="right" onclick="slide('right')">
                 <div class="row headlight">
                     <div class="col-xs-8 head">
-                        <h1>Ideas and Consulting</h1>
-                        <p>Our team is always innovating and ready to help</p>
+                        <h1>{{ language == "en" ? "Ideas and Consulting" : "Ideje i Konsultovanje"}}</h1>
+                        <p>{{ language == "en" ? "Our team is always innovating and ready to help" : "Nas tim je uvek inovativan i spreman da pomogne "}}</p>
                     </div>
                     <div class="col-xs-8 head hidden">
-                        <h1>Internacionalizacija poslovanja</h1>
-                        <p>Our team is always innovating and ready to help</p>
+                        <h1>{{ language == "en" ? "Business Internationalization" : "Internacionalizacija poslovanja"}}</h1>
+                        <p>{{ language == "en" ? "Co-operation with foreign companies" : "Saradnja sa stranim kompanijama"}}</p>
                     </div>
                     <div class="col-xs-8 head hidden">
-                        <h1>Moderno i efikasno poslovanje uslov za izlaz na medjunarodna  trzista</h1>
-                        <p>Our team is always innovating and ready to help</p>
+                        <h1>{{ language == "en" ? "Modern and efficent management is key for foreign market" : "Moderno i efikasno poslovanje uslov za izlaz na medjunarodna  trzista"}}</h1>
+                        <p>{{ language == "en" ? "Our team is always innovating and ready to help" : "Nas tim je uvek inovativan i spreman da pomogne "}}</p>
                     </div>
                     <div class="col-xs-8 head hidden">
-                        <h1>Istrazivanje trzista, analiza kupaca, promocija vaseg biznisa </h1>
-                        <p>Our team is always innovating and ready to help</p>
+                        <h1>{{ language == "en" ? "Market research, customer analysis and promoton of your business" : "Istrazivanje trzista, analiza kupaca, promocija vaseg biznisa"}} </h1>
+                        <p>{{ language == "en" ? "Our team is always innovating and ready to help" : "Nas tim je uvek inovativan i spreman da pomogne "}}</p>
                     </div>
                 </div>
             </div>
@@ -34,13 +34,13 @@
                 <div class="row">
                     <h1 style="text-align: center; margin-bottom:1%;">About Us</h1>
                     <div class="col-md-4 people">
-                        <h3>Who We Are</h3>
+                        <h3>{{ language == "en" ? "Who We Are" : "Mi smo"}}</h3>
                         <p>
                              We are a family business consulting company which is established in 2016. With over twenty-five years of personal professional experience on economic development area, we, as a family business, advocate companies on their competitive spirit at the existing market as well as assist them reaching the regional and international market. Core principle of the establishment of the business lies on our offering specific packages of assistance. In particular, technical assistance and contribution on youngsters who are enthusiastic and knowledgeable with technological advances. Key area’s experts are highly needed because what we are seeking is an overwhelming success. We deliver management strategies, blueprint for a more prosperous organization, and we are always on discussing the risks and crisis of a particular situation. We are a skilled company in the integration of employers-provided benefits, on monitoring and long-term well-being of companies. We're a company that brings together ideals and seek to attain them.
                         </p>
                     </div>
                     <div class="col-md-4 aboutTxt">
-                        <h3>What We Do</h3>
+                        <h3>{{ language == "en" ? "What We Do" : "Mi radimo"}}</h3>
                         <p>
                             We work closely and fully to comprehend your unique circumstances. We thoroughly support companies to stimulate their business internationalization in two main levels/directions:
                             First direction, is concerned with domestic companies. We work on to further modernize these companies by framing ideal organizational design. These businesses reaching the international market, increasing their efficiency and succeeding, are our main purposes and mark our identity.  An adequate promotion of the company on many other levels and its high-level visibility are guaranteed. 
@@ -48,7 +48,7 @@
                         </p>
                     </div>
                     <div class="col-md-4 howWeDo">
-                        <h3>How We Do</h3>
+                        <h3>{{ language == "en" ? "How We Do" : "Kako radimo"}}</h3>
 
                         <!--<h4> </h4>-->
                         <p>
@@ -72,7 +72,7 @@
         <figure>
             <div class="container services" id="services">
                 <div class="row servicesHead">
-                    <h1>Services</h1>
+                    <h1>{{ language == "en" ? "Services" : "Usloge"}}</h1>
                 </div>
                 <div class="row serviceContainer">
                     <div class="col-md-6">
@@ -81,7 +81,7 @@
                                 <img src="/front-end/resources/img/icons/4.svg" alt="">
                             </div>
                             <div class="col-sm-10">
-                                <h4>Business Cooperation Design</h4>
+                                <h4>{{ language == "en" ? "Business Cooperation Design" : "Dizajn Poslovne Saradnje"}}</h4>
                                 <p>
                                     The company’s most beneficial opportunities lie on the heartland of the company’s strength. Appropriate and interactive communication and the market’s potential is remarkably crucial. Highlighting the most significant and key characteristics of the company and its well-designed elements, undoubtedly will lead to improvement and the high opportunities for success.  Any preference of the company that wants to take into action such as trade mission, fair exhibition, B2B and/or B2C meetings, most likely will lead towards a more successful business path. 
                                 </p>
@@ -92,7 +92,7 @@
                                 <img src="/front-end/resources/img/icons/1.svg" alt="">
                             </div>
                             <div class="col-sm-10">
-                                <h4>Organizational design</h4>
+                                <h4>{{ language == "en" ? "Organizational design" : "Dizajn Organizacije"}}</h4>
                                 <p>
                                     Operating in global market economy, business companies actively interact with other systems. Every company aspires to satisfy customer’s needs and desires. Based on researches only 20 % reaches that, due to company’s focus on external rather than on internal challenges and few companies make an achievement. This job requires vitality, energy and plenty of resources. Internal strengths of the company further the attainment of the company’s objective. A proper and well-designed company costs less and its sustainability is guaranteed in the long run. 
                                 </p>
@@ -106,7 +106,7 @@
                                 <img src="/front-end/resources/img/icons/5.svg" alt="">
                             </div>
                             <div class="col-sm-10">
-                                <h4>Textile Industry Source Suppliers</h4>
+                                <h4>{{ language == "en" ? "Textile Industry Source Suppliers" : "Izbor Dobavljaca Tekstilne Industrije"}}</h4>
                                 <p>
                                    Short delivery, qualified labor force, modern technology, infrastructure growth and relatively high standards for corporate social responsibility (CRS) made Serbia a noteworthy center in apparel manufacturing in European companies’ eyes. Flexibility, speed, specialized knowledge and services are competitive advantages that Serbia owns, particularly in Southwest region. The cooperation with positive EU brand trends is growing rapidly. Efficacy in companies’ security for international and office standards and the right of workers are hugely respected 
                                 </p>
@@ -117,7 +117,7 @@
                                 <img src="/front-end/resources/img/icons/2.svg" alt="">
                             </div>
                             <div class="col-sm-10">
-                                <h4>Graphic & Arch design</h4>
+                                <h4>{{ language == "en" ? "Graphic & Arch design" : "Graficki i Arch Dizajn"}}</h4>
                                 
                                 <p>
                                     Backing value propositions by branding is among main purposes of the company. It’s important to create a reference on the customer’s mind. The usage of the advertising, publicity, various marketing ideas are shared among the company. Implanting a visual identity that can satisfy the eyes of the customers within the company indicates the carefulness of the company that has on them. Promotions are another aspect that company doesn’t disregard. It pays close attention to promotion and the extent of the effect  which have  on the general society.
@@ -134,7 +134,7 @@
                                 <img src="/front-end/resources/img/icons/4.svg" alt="">
                             </div>
                             <div class="col-xs-10">
-                                <h4>Business Cooperation Design</h4>
+                                <h4>{{ language == "en" ? "Business Cooperation Design" : "Dizajn Poslovne Saradnje"}}</h4>
                                 <p>
                                     The company’s most beneficial opportunities lie on the heartland of the company’s strength. Appropriate and interactive communication and the market’s potential is remarkably crucial. Highlighting the most significant and key characteristics of the company and its well-designed elements, undoubtedly will lead to improvement and the high opportunities for success.  Any preference of the company that wants to take into action such as trade mission, fair exhibition, B2B and/or B2C meetings, most likely will lead towards a more successful business path. 
                                 </p>
@@ -146,7 +146,7 @@
                                 <img src="/front-end/resources/img/icons/1.svg" alt="">
                             </div>
                             <div class="col-xs-10">
-                                <h4>Organizational design</h4>
+                                <h4>{{ language == "en" ? "Organizational design" : "Dizajn Organizacije"}}</h4>
                                 <p>
                                     Operating in global market economy, business companies actively interact with other systems. Every company aspires to satisfy customer’s needs and desires. Based on researches only 20 % reaches that, due to company’s focus on external rather than on internal challenges and few companies make an achievement. This job requires vitality, energy and plenty of resources. Internal strengths of the company further the attainment of the company’s objective. A proper and well-designed company costs less and its sustainability is guaranteed in the long run. 
                                 </p>
@@ -157,7 +157,7 @@
                                 <img src="/front-end/resources/img/icons/5.svg" alt="">
                             </div>
                             <div class="col-xs-10">
-                                <h4>Textile Industry Source Suppliers</h4>
+                                <h4>{{ language == "en" ? "Textile Industry Source Suppliers" : "Izbor Dobavljaca Tekstilne Industrije"}}</h4>
                                 <p>
                                    Short delivery, qualified labor force, modern technology, infrastructure growth and relatively high standards for corporate social responsibility (CRS) made Serbia a noteworthy center in apparel manufacturing in European companies’ eyes. Flexibility, speed, specialized knowledge and services are competitive advantages that Serbia owns, particularly in Southwest region. The cooperation with positive EU brand trends is growing rapidly. Efficacy in companies’ security for international and office standards and the right of workers are hugely respected 
                                 </p>
@@ -168,7 +168,7 @@
                                 <img src="/front-end/resources/img/icons/2.svg" alt="">
                             </div>
                             <div class="col-xs-10">
-                                <h4>Graphic & Arch design</h4>
+                                <h4>{{ language == "en" ? "Graphic & Arch design" : "Graficki i Arch Dizajn"}}</h4>
                                 
                                 <p>
                                     Backing value propositions by branding is among main purposes of the company. It’s important to create a reference on the customer’s mind. The usage of the advertising, publicity, various marketing ideas are shared among the company. Implanting a visual identity that can satisfy the eyes of the customers within the company indicates the carefulness of the company that has on them. Promotions are another aspect that company doesn’t disregard. It pays close attention to promotion and the extent of the effect  which have  on the general society.
@@ -238,7 +238,7 @@
                     </div>-->
                     
                     <div class="col-sm-12">
-                        <h3>Our Latest Projects</h3>
+                        <h3>{{ language == "en" ? "Our Latest Projects" : "Nasi Najnovi Projekti"}}</h3>
                         <div class="col-sm-7 projects">
                         {{pictures.name|first}}
                         {% for picture in pictures %}
@@ -253,7 +253,7 @@
                         </div>
                     </div>
                     <div class="col-xs-12">
-                        <h3>Clients</h3>
+                        <h3>{{ language == "en" ? "Clients" : "Klienti"}}</h3>
                         <div class="col-xs-4 clients stig" onclick="newTabOpen('http://www.stigco.com/')">
                             <img src="/front-end/resources/img/logo/STIG.svg" alt="" >
                         </div>
@@ -273,24 +273,24 @@
                 <div class="row">
                     <div class="col-sm-6 formContainer">
                         <div class="infoBackground">
-                            <h1>Contact Us</h1>
+                            <h1>{{ language == "en" ? "Contact Us" : "Kontaktirajte nas"}}</h1>
                             
                             <form method="post" action="/mail" accept-charset="iso-8859-1">
                                 <div class="col-sm-12 notShow">
                                     <div class="col-md-6">
                                         <div class="col-sm-12 input">
-                                            <input type="text" placeholder="your name" name="name" class="name">
+                                            <input type="text" placeholder="{{ language == "en" ? "your name" : "vase ime"}}" name="name" class="name">
                                         </div>
                                         <div class="col-sm-12 input">
-                                            <input type="text" placeholder="your e-mail" class="senderEmail" name="senderEmail">
+                                            <input type="text" placeholder="{{ language == "en" ? "your e-mail" : "vas e-mail"}}" class="senderEmail" name="senderEmail">
                                         </div>
                                         <div class="col-sm-12 input">
-                                            <input type="text" placeholder="subject" name="subject" class="subj">
+                                            <input type="text" placeholder="{{ language == "en" ? "subject" : "pisete nam o"}}" name="subject" class="subj">
                                         </div>
                                     </div>
                                     <div class="col-md-6 area">
                                         <div class="col-sm-12">
-                                            <textarea class="content" name="content" cols="30" rows="10" placeholder="YOUR TEXT HERE" ></textarea>
+                                            <textarea class="content" name="content" cols="30" rows="10" placeholder="{{ language == "en" ? "YOUR TEXT HERE" : "VAS TEKST OVDE"}}" ></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -386,7 +386,7 @@
                 </div>
             </div>
         </div>
-         {% include 'parts/footer.twig'%} 
+         {% include 'parts/footer.twig' with {'language' : language }%} 
          {% include 'parts/modal.twig' %}
 
        <script src="/front-end/resources/js/home.js"></script> 

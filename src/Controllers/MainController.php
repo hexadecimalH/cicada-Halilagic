@@ -19,14 +19,25 @@ class MainController
         $this->mainService = $mainService;
     }
 
-    public function index(){
+    public function index(Application $app, Request $request, $language){
+        $lang = ($language == "") ? 'en' : $language;
         $projectPics = $this->mainService->getProjectPics();
-        return $this->twig->render('index.twig', ['page' => 'index', 'pictures' => $projectPics ]);
+        return $this->twig->render('index.twig', ['page' => 'index', 'pictures' => $projectPics, 'language' => $lang]);
     }
 
-    public function projects(){
+    public function indexBegin(Application $app, Request $request){
+        $projectPics = $this->mainService->getProjectPics();
+        return $this->twig->render('index.twig', ['page' => 'index', 'pictures' => $projectPics, 'language' => 'en']);
+    }
+
+    public function projects(Application $app, Request $request, $language){
         $projects = $this->mainService->getProjects();
         return $this->twig->render('projects.twig',['page' => 'projects', 'projects' => $projects]);
+    }
+
+    public function projectsBegin(Application $app, Request $request, $language){
+        $projects = $this->mainService->getProjects();
+        return $this->twig->render('projects.twig',['page' => 'projects', 'projects' => $projects,'language' => $language ]);
     }
 
     public function sendMail(Application $app, Request $request){
