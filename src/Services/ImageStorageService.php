@@ -49,7 +49,7 @@ class ImageStorageService
     }
 
     public function makeThumb($title, $picture){
-        $image = $this->imageManipulationLibrary->resizeThumbnail(file_get_contents($this->protocol.$this->domain.$picture->url));
+        $image = $this->imageManipulationLibrary->resizeThumbnail(file_get_contents($this->basePath.$picture->url));
         $imageName = explode('/', $picture->url);
         $path = '/uploads'.'/'.$title.'/thumb'.'/'.$imageName[3];
         if(!file_exists($this->basePath.'/uploads'.'/'.$title.'/thumb'.'/')){
