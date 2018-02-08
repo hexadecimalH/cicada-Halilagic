@@ -108,7 +108,7 @@ $('.upload-project').click(function(event){
 
 $('#upload').change(function(event){
     var names = [];
-    var data = new FormData();
+        var data = new FormData();
     for (var i = 0; i < $(this).get(0).files.length; ++i) {
         names.push($(this).get(0).files[i].name);
         data.append('pic-'+i, $(this).get(0).files[i]);

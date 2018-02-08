@@ -2,7 +2,7 @@
 namespace Halilagic\Libraries;
 
 
-use \Eventviva\ImageResize;
+use \Gumlet\ImageResize;
 
 class ImageManipulationLibrary
 {
@@ -22,11 +22,8 @@ class ImageManipulationLibrary
         $image = ImageResize::createFromString($binaryContents);
         $image->resizeToWidth(900);
         $resizedBinaryContents = $image->getImageAsString();
-        return [
-            'width' => $image->getDestWidth(),
-            'height' => $image->getDestHeight(),
-            'content' => $resizedBinaryContents
-        ];
+
+        return $resizedBinaryContents;
     }
     public function resizeThumbnail($binaryContents){
         $image = ImageResize::createFromString($binaryContents);

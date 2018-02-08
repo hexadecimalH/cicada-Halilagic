@@ -26,17 +26,20 @@ class MainController
     }
 
     public function indexBegin(Application $app, Request $request){
+
         $projectPics = $this->mainService->getProjectPics();
         return $this->twig->render('index.twig', ['page' => 'index', 'pictures' => $projectPics, 'language' => 'en']);
     }
 
     public function projects(Application $app, Request $request, $language){
         $projects = $this->mainService->getProjects();
+//        var_dump($projects);die();
         return $this->twig->render('projects.twig',['page' => 'projects', 'projects' => $projects]);
     }
 
     public function projectsBegin(Application $app, Request $request, $language){
         $projects = $this->mainService->getProjects();
+//        var_dump($projects);die();
         return $this->twig->render('projects.twig',['page' => 'projects', 'projects' => $projects,'language' => $language ]);
     }
 

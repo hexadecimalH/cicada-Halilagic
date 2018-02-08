@@ -7,9 +7,9 @@
         {% include 'parts/navigation.twig' with {'language': language} %}
        <main id="mainFrame">
             <div class="container-fluid mainFrame">
+                <div class="row headlight">
                     <img src="/front-end/resources/img/arrow.svg" alt="" class="arrow" id="left" onclick="slide('left')">
                     <img src="/front-end/resources/img/arrow.svg" alt="" class="arrow" id="right" onclick="slide('right')">
-                <div class="row headlight">
                     <div class="col-xs-8 head">
                         <h1>{{ language == "en" ? "Ideas and Consulting" : "Ideje i Konsultovanje"}}</h1>
                         <p>{{ language == "en" ? "Our team is always innovating and ready to help" : "Nas tim je uvek inovativan i spreman da pomogne "}}</p>

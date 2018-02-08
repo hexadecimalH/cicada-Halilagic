@@ -27,13 +27,13 @@ class ProjectPicturesMigration extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('project_pics');
-        $table->addColumn('project_id', 'integer')
+            $table = $this->table('project_pics');
+        $table->addColumn('project_id', 'integer', ['null' => true])
               ->addForeignKey('project_id', 'projects', 'id', array('delete'=> 'CASCADE', 'update'=> 'NO_ACTION'))
               ->addColumn('url', 'text')
               ->addColumn('type', 'enum', ['values' => ['normal', 'thumb']])
-              ->addColumn('data_title', 'text')
-              ->addColumn('data_light_box', 'text')
+              ->addColumn('data_title', 'text', ['null' => true])
+              ->addColumn('data_light_box', 'text', ['null' => true])
               ->addColumn('created', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
               ->create();
     }

@@ -28,24 +28,26 @@ class ImageStorageService
      */
     public function storeImages($title, $images){
         $urls = [];
+
         foreach($images as $image) {
             // Compose image name
             // until I come up with algorithm that generates unique names
             $imageName = str_replace("_", " ", $image->getClientOriginalName());
 
             // Resize
-            // $image = $this->imageManipulationLibrary->resizePostImage(file_get_contents($image->getRealPath()));
+             $image = $this->imageManipulationLibrary->resizeImage(file_get_contents($image->getRealPath()));
 
             // Store to disk
             $path = $this->basePath.'/'.$title.'/'.$imageName;
             if(!file_exists($this->basePath.'/uploads'.'/'.$title)){
                 mkdir($this->basePath.'/uploads'.'/'.$title, 0777, true);
             }
-            $path = $this->storeImageContents('/uploads'.'/'.$title.'/'.$imageName, file_get_contents($image->getRealPath()));
-            $url[] = $this->getFullUrl($path);
+            $path = $this->storeImageContents('/uploads'.'/'.$title.'/'.$imageName, $image);
+            $urls[] = $this->getFullUrl($path);
             // Add resized image to result set
         }
-        return $url;
+
+        return $urls;
     }
 
     public function makeThumb($title, $picture){

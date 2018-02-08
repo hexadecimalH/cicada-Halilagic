@@ -3,6 +3,7 @@
 namespace Halilagic\Controllers;
 
 use Halilagic\Application;
+use Halilagic\Services\LogInService;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;

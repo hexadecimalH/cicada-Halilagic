@@ -2,9 +2,10 @@
 
 namespace Halilagic\Services;
 
-use Halilagic\Models\User;
 use Halilagic\Models\Project;
 use Halilagic\Models\ProjectPic;
+use Halilagic\Services\ImageStorageService;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 class AdminService
 {
@@ -12,78 +13,135 @@ class AdminService
 
     public function __construct($imageStorageService)
     {
-        $this->imageStorageService = $imageStorageService; 
+        /** @var ImageStorageService imageStorageService */
+        $this->imageStorageService = $imageStorageService;
     }
 
-    public function storeProjectImages($projectId, $images){
+    public function getProjects()
+    {
+        /** @var Project[] $projects */
+        $projects = Project::find('all', ['include' => ['project_pics']]);
+
+        $projects = array_map(function ($el) {
+            return $el->serialize();
+        }, $projects);
+        return $projects;
+    }
+
+    public function uploadTemporaryImages($images)
+    {
+        $urls = $this->imageStorageService->storeImages("temp", $images);
+
+        foreach ($urls as $url) {
+            $pic = ProjectPic::create([
+                'url' => $url,
+                'type' => 'normal',
+                'data_title' => 'Interior Design']);
+        }
+
+        return $urls;
+    }
+
+    public function storeProjectImages($projectId, $images)
+    {
         $project = Project::first(['conditions' => ['id = ?', $projectId]]);
         $title = strtolower(preg_replace('/\s+/', '', $project->title));
         $urls = $this->imageStorageService->storeImages($title, $images);
         $images = [];
-        foreach($urls as $url){
-            $images[] = ProjectPic::create(['project_id'=> $projectId,
-                                'url' => $url,
-                                'type'=> 'normal',
-                                'data_title' => 'Interior Design',
-                                'data_light_box' => $project->title]);
+        foreach ($urls as $url) {
+            $images[] = ProjectPic::create(['project_id' => $projectId,
+                'url' => $url,
+                'type' => 'normal',
+                'data_title' => 'Interior Design',
+                'data_light_box' => $project->title]);
         }
         return $images;
     }
 
-    public function deletePicture($pictureId){
+    public function deletePicture($pictureId)
+    {
         $picture = ProjectPic::find($pictureId);
         $this->imageStorageService->removeContent($picture->url);
         $picture->delete();
     }
 
-    public function cancelImageUpload($images){
-        foreach($images as $image){
+    public function deleteImageByUrl($url)
+    {
+        /** @var ProjectPic $picture */
+        $picture = ProjectPic::find("first", ["conditions" => ["url LIKE ?", $url]]);
+        try{
+            $this->imageStorageService->removeContent($picture->url);
+            $picture->delete();
+            return true;
+        } catch (Exception $e){
+            return false;
+        }
+    }
+
+    public function cancelImageUpload($images)
+    {
+        foreach ($images as $image) {
             $img = json_decode($image);
             $this->deletePicture($img->id);
         }
     }
 
-    public function updateAboutSection($id, $text, $language){
+    public function updateAboutSection($id, $text, $language)
+    {
         $project = Project::find($id);
-        if($language == "en"){
+        if ($language == "en") {
             $project->aboutenglish = $text;
-        }
-        else{
+        } else {
             $project->about = $text;
         }
-        
+
         $project->save();
     }
 
-    public function createNewProject($title, $about){
-        $project = Project::create(['title' => $title, 'about' => $about]);
-        
+    public function createNewProject($title, $about, $aboutSrb)
+    {
+        $project = Project::create(['title' => $title, 'about' => $aboutSrb, 'aboutenglish' => $about]);
+
         return $project->serialize();
     }
 
-    public function deleteProject($projectId){
+    public function assignProjectPictures($id, $uploadedPics){
+        $pictures = [];
+        foreach($uploadedPics as $url){
+            /** @var ProjectPic $picture */
+            $picture = ProjectPic::find('first',['conditions' => ['url LIKE ?', $url]]);
+            $picture->project_id = $id;
+            $picture->save();
+            $pictures[] = $picture->serialize();
+        }
+        return $pictures;
+    }
+
+    public function deleteProject($projectId)
+    {
         $project = Project::find($projectId);
-        $pictures = ProjectPic::all(['conditions' => ['project_id' , $project->id]]);
-        foreach($pictures as $picture){
+        $pictures = ProjectPic::all(['conditions' => ['project_id', $project->id]]);
+        foreach ($pictures as $picture) {
             $this->imageStorageService->removeContent($picture->url);
             $picture->delete();
         }
         $project->delete();
     }
 
-    public function makeThumb($id){
+    public function makeThumb($id)
+    {
         $picture = ProjectPic::find($id);
         $proj = Project::find($picture->project_id);
         $title = str_replace(" ", "", $proj->title);
-        $resizedImagePath = $this->imageStorageService->makeThumb(strtolower($title),$picture);
+        $resizedImagePath = $this->imageStorageService->makeThumb(strtolower($title), $picture);
         $this->imageStorageService->removeContent($picture->url);
         $picture->delete();
 
-        $thumbImage = ProjectPic::create(['project_id'=> $proj->id,
-                            'url' => $resizedImagePath,
-                            'type'=> 'thumb',
-                            'data_title' => 'Interior Design',
-                            'data_light_box' => $proj->title]);
+        $thumbImage = ProjectPic::create(['project_id' => $proj->id,
+            'url' => $resizedImagePath,
+            'type' => 'thumb',
+            'data_title' => 'Interior Design',
+            'data_light_box' => $proj->title]);
         return $thumbImage;
     }
 

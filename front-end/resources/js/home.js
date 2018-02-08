@@ -91,7 +91,7 @@ function sendMail(){
         contentType: false,
         processData: false
     }).done(function(data){
-        var isSent = data.includes('smtp.gmail.com at your service');
+        var isSent = data.includes('smtp.gmail.com at your services');
         showModalWithMessage(isSent);
     });
 }

@@ -1,15 +1,45 @@
+#app{
+    background-color:#22394C;
+}
 .admin-heading{
     text-align:center;
     background-color:rgba(34,57,76,0.5);
     color:#fff;
 }
+.panel-default>.panel-heading{
+    color:#fff;
+    background-color: #3e6788;
+    border-color: #3e6788;
+}
 
+.list-group-item.active{
+    background-color: #3e6788;
+    border-color: #3e6788;
+}
+.list-group-item:hover, .list-group-item:focus{
+    background-color: #3e6788 !important;
+    border-color: #3e6788 !important;
+    color:#fff !important;
+}
+.well .thumbnail{
+    margin-bottom:0 !important;
+    position:relative;
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.close{
+    position: absolute;
+    top: -12px;
+    right: 0;
+    width: 10px;
+    font-size: 25px;
+}
 .admin-heading h3{
     margin: 4% 10%;
 }
 .thumbnail img{
-    width:400px;
-    height:180px;
+    width:120px;
 }
 .panel-heading h3{
     text-align:center;
@@ -37,4 +67,21 @@
 }
 .thumb{
     background-color:silver;
+}
+.pannel-wrapper{
+    width:50%;
+    margin:5% auto;
+}
+
+.error-area{
+    border-color:#a94442;
+    color:#a94442 !important;
+}
+
+.clearfix{
+    clear:both;
+}
+.form-horizontal .form-group{
+    margin-left:0;
+    margin-right:0;
 }

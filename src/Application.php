@@ -11,6 +11,7 @@ use Halilagic\Services\MainService;
 use Halilagic\Services\LogInService;
 use Halilagic\Services\AdminService;
 use Halilagic\Services\ImageStorageService;
+use Halilagic\Libraries\ValidationLibrary;
 use Halilagic\Libraries\ImageManipulationLibrary;
 
 class Application extends \Cicada\Application
@@ -25,7 +26,7 @@ class Application extends \Cicada\Application
         $this->domain = $domain;
         $this->protocol = $protocol;
         // session_start();
-        $this->configure($configPath.'halilagic/');
+        $this->configure($configPath);
         $this->basePath = $this['config']->getPathToUpload();
         $this->setupLibraries();
         $this->setupServices();
@@ -41,6 +42,10 @@ class Application extends \Cicada\Application
     protected function setupLibraries(){
         $this['imageManipualtionLibrary'] = function () {
             return new ImageManipulationLibrary();
+        };
+
+        $this['validationLibrary'] = function () {
+            return new ValidationLibrary();
         };
     }
 

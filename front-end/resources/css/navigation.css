@@ -112,7 +112,7 @@ header div{
     height:20%;
 }
 
-.nav{
+.naviga{
     height:51%;
     background-color: #fff;
     -ms-transform: skewX(-30deg); /* IE 9 */
@@ -121,7 +121,7 @@ header div{
     padding-right:3% !important;
     margin-left: 5px;
 }
-.nav ul{
+.naviga ul{
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -131,13 +131,13 @@ header div{
     -webkit-transform: skewX(30deg); /* Safari */
     transform: skewX(30deg);
 }
-.nav ul li {
+.naviga ul li {
     float: right;
     display:table;
     height:100%;
 }
 
-.nav ul li a {
+.naviga ul li a {
     display: table-cell;
     vertical-align: middle;
     color: #000;
@@ -146,7 +146,7 @@ header div{
 
     text-decoration: none;
 }
-.nav ul li a:hover {
+.naviga ul li a:hover {
     background-color:#22394C;
     color:#fff;
 }
