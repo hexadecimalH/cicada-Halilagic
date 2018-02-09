@@ -24,8 +24,7 @@ class Application extends \Cicada\Application
         parent::__construct();
         $this->domain = $domain;
         $this->protocol = $protocol;
-        // session_start();
-        $this->configure($configPath.'halilagic/');
+        $this->configure($configPath);
         $this->basePath = $this['config']->getPathToUpload();
         $this->setupLibraries();
         $this->setupServices();

@@ -253,7 +253,7 @@ figure{
 .formContainer{
     padding-right:0;
     background:url("../img/world.svg") no-repeat fixed left;
-    background-position-x:-20%;
+    background-position-x: -12em;
 }
 .input{
     margin:1em;
