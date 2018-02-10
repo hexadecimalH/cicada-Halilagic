@@ -23,7 +23,7 @@ function getProtocol()
 
 // $app = new Application($_SERVER['HOME'], 'main', getProtocol().'://'.$_SERVER['HTTP_HOST'])
 $app = new Application($_SERVER['HOME'], $_SERVER['HTTP_HOST'], getProtocol().'://');
-
+var_dump("This is prod test");die();
 // Controllers
 $adminController = new AdminController($app['adminService']);
 $mainController = new MainController($app['twig'], $app['mainService']);
