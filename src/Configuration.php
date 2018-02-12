@@ -23,4 +23,8 @@ class Configuration
         return $this->config['path'];
     }
 
+    public function getCredentials(){
+        return $this->config['credentials'];
+    }
+
 }

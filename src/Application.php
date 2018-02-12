@@ -27,7 +27,7 @@ class Application extends \Cicada\Application
         $this->configure("/home/.config/halilagic/");
         $this->basePath = $this['config']->getPathToUpload();
         $this->setupLibraries();
-        $this->setupServices();
+        $this->setupServices($this['config']->getCredentials());
         $this->setupTwig();
         $this->configureDatabase();
         // $this->setupSessionContainer();
@@ -43,13 +43,13 @@ class Application extends \Cicada\Application
         };
     }
 
-    private function setupServices() {
+    private function setupServices($credentials) {
         $this['logInService'] = function () {
             return new LogInService();
         };
 
-        $this['mainService'] = function () {
-            return new MainService();
+        $this['mainService'] = function () use($credentials) {
+            return new MainService($credentials);
         };
 
         $this['imageStorageService'] = function () {
