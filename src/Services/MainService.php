@@ -62,7 +62,7 @@ class MainService
         $this->mail->AltBody = htmlentities($content);
         $this->mail->addAddress('info@hcg.rs', "Halilagic Info");     // Add a recipient
         $isSent = $this->mail->Send();
-        return $isSent;
+
          if(!$isSent) {
             return false;
          }
