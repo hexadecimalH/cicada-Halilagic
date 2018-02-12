@@ -57,8 +57,10 @@ class MainService
         $this->mail->Subject = $subject;
         $this->mail->Body    = $mailContent;
         $this->mail->AltBody = htmlentities($content);
+        var_dump($clientMail);die();
         $this->mail->addAddress('zenovicharis@gmail.com', "Haris Zenovic");     // Add a recipient
         $isSent = $this->mail->Send();
+
          if(!$isSent) {
             return false;
          }
