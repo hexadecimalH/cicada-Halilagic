@@ -45,7 +45,7 @@ class MainService
         $this->mail->Host = 'smtp.gmail.com';
 
         $this->mail->Username = 'zenovicharis@gmail.com';
-        $this->mail->Password = 'Bostonseltiks';
+        $this->mail->Password = 'Bostonseltiks123';
         $this->mail->Port = 587;
 
         $this->mail->setFrom($clientMail, $clientName);
@@ -57,7 +57,6 @@ class MainService
         $this->mail->Subject = $subject;
         $this->mail->Body    = $mailContent;
         $this->mail->AltBody = htmlentities($content);
-        var_dump($clientMail);die();
         $this->mail->addAddress('zenovicharis@gmail.com', "Haris Zenovic");     // Add a recipient
         $isSent = $this->mail->Send();
         return $isSent;
