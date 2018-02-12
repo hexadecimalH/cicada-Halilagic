@@ -45,7 +45,7 @@ class MainService
         $this->mail->Host = 'smtp.gmail.com';
 
         $this->mail->Username = 'zenovicharis@gmail.com';
-        $this->mail->Password = 'Bostonseltiks123';
+        $this->mail->Password = 'zoviawtkufraxhvo';
         $this->mail->Port = 587;
 
         $this->mail->setFrom($clientMail, $clientName);
