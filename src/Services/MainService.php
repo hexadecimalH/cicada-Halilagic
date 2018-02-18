@@ -10,9 +10,12 @@ class MainService
 {
     /** @var PHPmailer $mail**/
     private $mail;
+    private $email;
+    private $password;
 
-    public function __construct(){
-
+    public function __construct($credentials){
+        $this->email = $credentials[0];
+        $this->password = $credentials[1];
     }
 
     public function getProjects(){
@@ -44,8 +47,8 @@ class MainService
         $this->mail->SMTPSecure = 'tls';
         $this->mail->Host = 'smtp.gmail.com';
 
-        $this->mail->Username = 'zenovicharis@gmail.com';
-        $this->mail->Password = 'Bostonseltiks';
+        $this->mail->Username = $this->email;
+        $this->mail->Password = $this->password;
         $this->mail->Port = 587;
 
         $this->mail->setFrom($clientMail, $clientName);
@@ -57,8 +60,9 @@ class MainService
         $this->mail->Subject = $subject;
         $this->mail->Body    = $mailContent;
         $this->mail->AltBody = htmlentities($content);
-        $this->mail->addAddress('zenovicharis@gmail.com', "Haris Zenovic");     // Add a recipient
+        $this->mail->addAddress('info@hcg.rs', "Halilagic Info");     // Add a recipient
         $isSent = $this->mail->Send();
+
          if(!$isSent) {
             return false;
          }

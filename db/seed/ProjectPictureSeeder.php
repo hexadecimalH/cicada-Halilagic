@@ -24,28 +24,14 @@ class ProjectPictureSeeder extends AbstractSeed
             ],
             [
                 'project_id'    => 1,
-                'url' => '/uploads/uptown/2.jpg',
+                'url' => '/uploads/uptown/2.png',
                 'type' => 'normal',
                 'data_title' => 'Interior Design',
                 'data_light_box' => 'Up Town'
             ],
             [
                 'project_id'    => 1,
-                'url' => '/uploads/uptown/3.jpg',
-                'type' => 'normal',
-                'data_title' => 'Interior Design',
-                'data_light_box' => 'Up Town'
-            ],
-            [
-                'project_id'    => 1,
-                'url' => '/uploads/uptown/4.jpg',
-                'type' => 'normal',
-                'data_title' => 'Interior Design',
-                'data_light_box' => 'Up Town'
-            ],
-            [
-                'project_id'    => 1,
-                'url' => '/uploads/barbosa/thumb/1.png',
+                'url' => '/uploads/uptown/thumb/2.jpg',
                 'type' => 'thumb',
                 'data_title' => 'Interior Design',
                 'data_light_box' => 'Up Town'
@@ -66,21 +52,14 @@ class ProjectPictureSeeder extends AbstractSeed
             ],
             [
                 'project_id'    => 2,
-                'url' => '/uploads/barbosa/3.jpg',
+                'url' => '/uploads/barbosa/5.jpg',
                 'type' => 'normal',
                 'data_title' => 'Interior Design',
                 'data_light_box' => 'Barbosa'
             ],
             [
                 'project_id'    => 2,
-                'url' => '/uploads/barbosa/4.jpg',
-                'type' => 'normal',
-                'data_title' => 'Interior Design',
-                'data_light_box' => 'Barbosa'
-            ],
-            [
-                'project_id'    => 2,
-                'url' => '/uploads/uptown/thumb/1.png',
+                'url' => '/uploads/barbosa/thumb/3.jpg',
                 'type' => 'thumb',
                 'data_title' => 'Interior Design',
                 'data_light_box' => 'Barbosa'

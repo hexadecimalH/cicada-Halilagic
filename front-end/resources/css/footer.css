@@ -47,7 +47,7 @@ footer{
 }
 .arrow{
     position:absolute;
-    top:54%;
+    top:29em;
     height:5%;
     -webkit-transition: all .4s ease-out 0s;
     -moz-transition: all .4s ease-out 0s;
