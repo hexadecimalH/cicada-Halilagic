@@ -28,7 +28,7 @@ $app = new Application($_SERVER['HOME'], $_SERVER['HTTP_HOST'], getProtocol().':
 
 // Controllers
 $adminController = new AdminController($app['adminService'], $app['validationLibrary']);
-//var_dump("hello");die();
+// var_dump("hello");die();
 $mainController = new MainController($app['twig'], $app['mainService']);
 $logInController = new LogInController($app['twig'], $app['logInService']);
 
@@ -46,7 +46,8 @@ $logInRouteCollection = $app['collection_factory'];
 $adminRouteCollection->post('/upload-pictures',             [$adminController, 'uploadPictures'])->prefix('/admin');
 $adminRouteCollection->get('/projects',                     [$adminController, 'getProjects'])->prefix('/admin');
 $adminRouteCollection->post('/createproject',               [$adminController, 'createProject'])->prefix('/admin');
-$adminRouteCollection->post('/delete-picture',              [$adminController, 'deletePicture'])->prefix('/admin');;
+$adminRouteCollection->post('/delete-picture/{id}',         [$adminController, 'deletePicture'])->prefix('/admin');
+$adminRouteCollection->post('/update-project',              [$adminController, 'updateProject'])->prefix('/admin');
 //Log In Controller routes
 $logInRouteCollection->get('/login',         [$logInController, 'logIn']);
 $logInRouteCollection->post('/login',        [$logInController, 'checkCredentials']);
@@ -61,21 +62,20 @@ $mainRouteCollection->post('/mail',                     [ $mainController, 'send
 
 
 //Admin Controller routes
-$adminRouteCollection->post('/upload/{projectId}',                      [$adminController, 'uploadPictures']);
+// $adminRouteCollection->post('/upload/{projectId}',                      [$adminController, 'uploadPictures']);
 
-$adminRouteCollection->post('/cancel',                                  [$adminController, 'cancelUploads']);
-$adminRouteCollection->post('/update-about/{projectId}/{language}',     [$adminController, 'updateProjectAbout']);
-$adminRouteCollection->post('/project',                                 [$adminController, 'createProject']);
-$adminRouteCollection->post('/project/{projectId}',                     [$adminController, 'deleteProject']);
-$adminRouteCollection->post('/make-thumbnail/{pictureId}',              [$adminController, 'makeThumbnail']);
+// $adminRouteCollection->post('/cancel',                                  [$adminController, 'cancelUploads']);
+// $adminRouteCollection->post('/project',                                 [$adminController, 'createProject']);
+// $adminRouteCollection->post('/project/{projectId}',                     [$adminController, 'deleteProject']);
+// $adminRouteCollection->post('/make-thumbnail/{pictureId}',              [$adminController, 'makeThumbnail']);
 
 
 
 //var_dump("hello");die();
 $app->addRouteCollection($logInRouteCollection);
-//$app->addRouteCollection($mainRouteCollection);
-$app->addRouteCollection($adminRouteCollection);
 
+$app->addRouteCollection($adminRouteCollection);
+$app->addRouteCollection($mainRouteCollection);
 $app->exception(function(Exception $e, Request $request) {
     $msg ="Something went wrong. The incident has been logged and our code monkeys are on it.";
     return new Response($msg, Response::HTTP_INTERNAL_SERVER_ERROR);

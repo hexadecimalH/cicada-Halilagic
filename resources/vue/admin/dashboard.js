@@ -1,7 +1,7 @@
-
 import ProjectComponent from './components/project.component';
 import ThumbComponent from './components/thumb.component';
 import ApiService from './services/api.service';
+import Project from './models/project';
 import {alert} from 'vue-strap';
 
 import Vue from 'vue';
@@ -27,15 +27,8 @@ var app = new Vue({
         api: new ApiService(),
         visible: true,
         projects: [],
-
-        project:{
-            title:'',
-            eng:'',
-            srb:'',
-            uploadedPics: []
-        },
+        project: new Project(),
         uploadedPics: []
-
 
     },
     methods: {
@@ -61,6 +54,7 @@ var app = new Vue({
             setTimeout(() => this.success = false, 5000);
         },
         uploadImages(e) {
+            console.log(this);
             let images = Array.from(e.target.files); // from FileList object to array
             let data = new FormData();
             let form = images.reduce((data, img) => {
@@ -69,19 +63,20 @@ var app = new Vue({
             }, data);
             let size = Array.from(form).reduce((sum, el) => sum += el[1].size, 0);
             let newSize = this.bytesToSize(size);
-            console.log(size);
             if(size < 1000000) {
                 this.processingAlert("It is uploading");
-                this.api.uploadPictures(data).then( response => {
-                    this.uploadedPics = this.uploadedPics ? this.uploadedPics.concat(response.data) : [];
-                    this.showProcessing = false;
-                    this.showSuccess(`Succesfully document uploaded ${newSize} `);
+                this.api.uploadPictures(data).then( 
+                    response => {
+                        console.log(response);
+                        this.uploadedPics = this.uploadedPics ? this.uploadedPics.concat(response.data) : [];
+                        this.showProcessing = false;
+                        this.showSuccess(`Succesfully document uploaded ${newSize} `);
 
-                }).catch(error => {
-                    this.processing = false;
-                    this.handlerError(error);
-                    this.showProcessing = false;
-                });
+                    }).catch(error => {
+                        this.processing = false;
+                        this.handlerError(error);
+                        this.showProcessing = false;
+                    });
             }
             else{
                 this.handlerError({message:`You uploaded ${newSize} the limiti is  1MB`});
@@ -106,31 +101,34 @@ var app = new Vue({
             return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
         },
         submit(){
-            let self = this;
-            this.$validator.validateAll().then(function (res) {
+            this.$validator.validateAll()
+            .then((res) => {
                 if(res){
-                    self.createProject();
+                    this.createProject();
                 }
                 else{
-                    var errorMessages = self.errors.all().join("\n");
-                    self.handlerError({message:errorMessages});
-
+                    var errorMessages = this.errors.all().join("\n");
+                    this.handlerError({message:errorMessages});
                 }
             });
-            console.log(this.errors)
         },
         createProject(){
-            this.project.uploadedPics = this.uploadedPics;
+            this.project.project_pics = this.uploadedPics;
             this.api.createProject(this.project).then(
                 response => {
                     console.log(response);
-                },
+                    // this.projects.push(response.data);
+                    // this.project = new Project();
+                    // this.uploadedPics = [];
+                    // $("#upload").val('');
+                    // this.errors.clear();
+                }).catch( 
                 error => {
-                    this.handlerError(error);
-                    console.log(typeof(error));
-
-                }
-            )
+                    var errors = JSON.parse(JSON.stringify(error.response.data));
+                    console.log(errors, error);
+                    errors.message = Object.keys(errors).map((el) => errors[el]).join(", ");
+                    this.handlerError(errors);
+                });
         }
     },
     mounted() {

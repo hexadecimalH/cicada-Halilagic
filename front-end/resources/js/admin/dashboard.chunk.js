@@ -5,8 +5,8 @@ webpackJsonp([0],[
 "use strict";
 
 
-var bind = __webpack_require__(11);
-var isBuffer = __webpack_require__(34);
+var bind = __webpack_require__(12);
+var isBuffer = __webpack_require__(35);
 
 /*global toString:true*/
 
@@ -500,6 +500,99 @@ process.umask = function() { return 0; };
 
 /***/ }),
 /* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _axios = __webpack_require__(16);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var ApiService = function () {
+    function ApiService() {
+        _classCallCheck(this, ApiService);
+    }
+
+    _createClass(ApiService, [{
+        key: 'getProjects',
+        value: function getProjects() {
+            return _axios2.default.get('/admin/projects');
+        }
+    }, {
+        key: 'createProject',
+        value: function createProject(project) {
+            var self = this;
+
+            var data = Object.keys(project).reduce(function (formData, key) {
+                if (key == "project_pics") {
+                    formData.append(key, project[key].map(function (img) {
+                        return img.id;
+                    }));
+                } else {
+                    formData.append(key, project[key]);
+                }
+
+                return formData;
+            }, new FormData());
+
+            return _axios2.default.post('/admin/createproject', data).then(function (response) {
+                return response;
+            });
+        }
+    }, {
+        key: 'uploadPictures',
+        value: function uploadPictures(data) {
+            var self = this;
+            return _axios2.default.post('/admin/upload-pictures', data).then(function (response) {
+                return response;
+            });
+        }
+    }, {
+        key: 'removeUploadedPicture',
+        value: function removeUploadedPicture(id) {
+            return _axios2.default.post('/admin/delete-picture/' + id).then(function (response) {
+                console.log(response);
+                return response;
+            }, function (error) {
+                console.log(error);
+                throw new XMLHttpRequestException();
+            });
+        }
+    }, {
+        key: 'updateProject',
+        value: function updateProject(project) {
+            var self = this;
+
+            var data = Object.keys(project).reduce(function (formData, key) {
+                if (key != "project_pics") {
+                    formData.append(key, project[key]);
+                    console.log(formData.get(key));
+                }
+                return formData;
+            }, new FormData());
+
+            return _axios2.default.post('/admin/update-project', data);
+        }
+    }]);
+
+    return ApiService;
+}();
+
+exports.default = ApiService;
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, setImmediate) {/*!
@@ -11301,17 +11394,17 @@ return Vue$3;
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(36).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(37).setImmediate))
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(0);
-var normalizeHeaderName = __webpack_require__(30);
+var normalizeHeaderName = __webpack_require__(31);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -11327,10 +11420,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(7);
+    adapter = __webpack_require__(8);
   } else if (typeof process !== 'undefined') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(7);
+    adapter = __webpack_require__(8);
   }
   return adapter;
 }
@@ -11404,7 +11497,7 @@ module.exports = defaults;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports) {
 
 var g;
@@ -11431,7 +11524,63 @@ module.exports = g;
 
 
 /***/ }),
-/* 5 */
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = undefined;
+
+var _api = __webpack_require__(2);
+
+var _api2 = _interopRequireDefault(_api);
+
+var _vue = __webpack_require__(3);
+
+var _vue2 = _interopRequireDefault(_vue);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ThumbComponent = _vue2.default.component('thumb', {
+    template: '<a class="thumbnail" v-on:click="() => false ">\n            <img v-bind:src="image.url" alt="...">\n            <i class="fa fa-times-circle close" aria-hidden="true" v-on:click="clear(image.id)"></i>\n        </a>',
+    props: {
+        image: {}
+    },
+    data: function data() {
+        return {
+            alternative: "",
+            hidden: true,
+            api: new _api2.default(),
+            imageId: this.image.id
+        };
+    },
+
+    methods: {
+        clear: function clear(id) {
+            var _this = this;
+
+            this.api.removeUploadedPicture(id).then(function (response) {
+                _this.$parent.projectMain.project_pics = _this.$parent.projectMain.project_pics.filter(function (pic) {
+                    return pic.id != id;
+                });
+            }).catch(function (error) {
+                _this.handleError(error);
+            });
+        },
+        handleError: function handleError(message) {
+            this.$parent.$parent.handlerError(message);
+        }
+    }
+});
+
+exports.default = ThumbComponent;
+
+/***/ }),
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11441,91 +11590,38 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _axios = __webpack_require__(6);
-
-var _axios2 = _interopRequireDefault(_axios);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var ApiService = function () {
-    function ApiService() {
-        _classCallCheck(this, ApiService);
-    }
+var Project = function Project() {
+    var title = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
+    var eng = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
+    var srb = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "";
+    var pics = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
 
-    _createClass(ApiService, [{
-        key: 'getProjects',
-        value: function getProjects() {
-            return _axios2.default.get('/admin/projects');
-        }
-    }, {
-        key: 'createProject',
-        value: function createProject(project) {
-            var self = this;
+    _classCallCheck(this, Project);
 
-            var data = Object.keys(project).reduce(function (formData, key) {
-                formData.append(key, project[key]);
-                return formData;
-            }, new FormData());
+    this.title = title;
+    this.aboutenglish = eng;
+    this.about = srb;
+    this.project_pics = pics;
+};
 
-            return _axios2.default.post('/admin/createproject', data).then(function (response) {
-                console.log(response);
-                // console.log(self.$parent);
-                return response;
-            });
-        }
-    }, {
-        key: 'uploadPictures',
-        value: function uploadPictures(data) {
-            var self = this;
-            return _axios2.default.post('/admin/upload-pictures', data).then(function (response) {
-                return response;
-            });
-        }
-    }, {
-        key: 'removeUploadedPicture',
-        value: function removeUploadedPicture(data) {
-            var self = this;
-            var formData = new FormData();
-            formData.append("url", data);
-            return _axios2.default.post('/admin/delete-picture', formData).then(function (response) {
-                return response;
-            }, function (error) {
-                throw new XMLHttpRequestException();
-
-                return error;
-            });
-        }
-    }]);
-
-    return ApiService;
-}();
-
-exports.default = ApiService;
+exports.default = Project;
 
 /***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(16);
-
-/***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(0);
-var settle = __webpack_require__(22);
-var buildURL = __webpack_require__(25);
-var parseHeaders = __webpack_require__(31);
-var isURLSameOrigin = __webpack_require__(29);
-var createError = __webpack_require__(10);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(24);
+var settle = __webpack_require__(23);
+var buildURL = __webpack_require__(26);
+var parseHeaders = __webpack_require__(32);
+var isURLSameOrigin = __webpack_require__(30);
+var createError = __webpack_require__(11);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(25);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -11622,7 +11718,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(27);
+      var cookies = __webpack_require__(28);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -11701,7 +11797,7 @@ module.exports = function xhrAdapter(config) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11727,7 +11823,7 @@ module.exports = Cancel;
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11739,13 +11835,13 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var enhanceError = __webpack_require__(21);
+var enhanceError = __webpack_require__(22);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -11764,7 +11860,7 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11782,55 +11878,6 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.default = undefined;
-
-var _thumb = __webpack_require__(13);
-
-var _thumb2 = _interopRequireDefault(_thumb);
-
-var _vue = __webpack_require__(2);
-
-var _vue2 = _interopRequireDefault(_vue);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ProjectComponent = _vue2.default.component('new-project', {
-    template: '<div>\n            <div class="col-sm-12">\n                <div class="well">\n                    <div class="row">\n                        <span v-for="image in project.project_pics">\n                            <thumb :url="image.url"></thumb>\n                        </span>\n\n                    </div>\n                </div>\n                <input type="file" class="hidden" id="upload" name="pics[]" multiple />\n                <div class="col-sm-6" v-if="editMode">\n                    <button type="button" class="btn btn-default btn-lg btn-block" style="margin-bottom: 2%;">Upload More</button>\n                </div>\n                <div class="col-sm-6" v-if="editMode">\n                    <button type="button" class="btn btn-default btn-lg btn-block"  v-on:click="$parent.upload" style="margin-bottom: 2%;">Set Thumbnail</button>\n                </div>\n                \n            </div>\n            <div class="col-sm-12">\n                <div class="well">\n                    <form>\n                        <div class="form-group">\n                            <p>Project Title</p>\n                            <div class="well"  v-if="!editMode">\n                                <p>{{title}}</p>\n                            </div>\n                            <input type="text" class="form-control dashboard-inputs" id="projectTitle" v-model=\'title\' placeholder="Project Title" v-if="editMode">\n                        </div>\n                        <div class="form-group">\n                            <ul class="nav nav-tabs" role="tablist">\n                                <li role="presentation" class="active"><a href="#english" aria-controls="english" role="tab" data-toggle="tab">English</a></li>\n                                <li role="presentation"><a href="#serbian" aria-controls="serbian" role="tab" data-toggle="tab">Serbian</a></li>\n                            </ul>\n\n                            <!-- Tab panes -->\n                            <div class="tab-content">\n                                <div role="tabpanel" class="tab-pane active" id="english">\n                                    <textarea class="form-control dashboard-inputs" rows="3" style=" resize: none;" v-model="aboutEng" v-if="editMode"></textarea>\n                                    <div class="well" v-if="!editMode">\n                                        <p >{{aboutEng}}</p>\n                                    </div>\n                                </div>\n                                <div role="tabpanel" class="tab-pane" id="serbian">\n                                    <textarea class="form-control dashboard-inputs" rows="3" style=" resize: none;" v-model="about" v-if="editMode"></textarea>\n                                    <div class="well" v-if="!editMode">\n                                        <p >{{about}}</p>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                        <div class="col-sm-6">\n                            <button type="button" class="btn btn-success btn-lg btn-block" style="margin-bottom: 2%;" v-if="editMode">Save</button>\n                        </div>\n                        <div class="col-sm-6">\n                            <button type="button" class="btn btn-success btn-lg btn-block" style="margin-bottom: 2%;" v-if="editMode" v-on:click="editMode = false">Cancel</button>\n                        </div>                        \n                        <button type="button" class="btn btn-success btn-lg btn-block" style="margin-bottom: 2%;" v-if="!editMode" v-on:click="editMode = true">Edit</button>\n                    </form>\n                    <div class="clearfix" style="clear:both"></div>\n                </div>\n            </div>\n        </div>',
-    props: {
-        project: {}
-    },
-    data: function data() {
-        return {
-            title: this.project.title,
-            uploadedPics: this.project.project_pics,
-            about: this.project.about,
-            aboutEng: this.project.aboutenglish,
-            editMode: false
-        };
-    },
-    components: {
-        ThumbComponent: _thumb2.default
-    },
-    methods: {
-        upload: function upload() {
-            console.log("hey hey");
-        }
-
-    }
-});
-
-exports.default = ProjectComponent;
-
-/***/ }),
 /* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11842,53 +11889,120 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = undefined;
 
-var _api = __webpack_require__(5);
+var _thumb = __webpack_require__(6);
+
+var _thumb2 = _interopRequireDefault(_thumb);
+
+var _project = __webpack_require__(7);
+
+var _project2 = _interopRequireDefault(_project);
+
+var _api = __webpack_require__(2);
 
 var _api2 = _interopRequireDefault(_api);
 
-var _vue = __webpack_require__(2);
+var _vue = __webpack_require__(3);
 
 var _vue2 = _interopRequireDefault(_vue);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var ThumbComponent = _vue2.default.component('thumb', {
-    template: '<a class="thumbnail" v-on:click="() => false ">\n            <img v-bind:src="url" alt="...">\n            <i class="fa fa-times-circle close" aria-hidden="true" v-on:click="clear"></i>\n        </a>',
+var ProjectComponent = _vue2.default.component('new-project', {
+    template: '<div>\n            <div class="col-sm-12">\n                <div class="well">\n                    <div class="row">\n                        <span v-for="image in projectMain.project_pics">\n                            <thumb :image="image"></thumb>\n                        </span>\n\n                    </div>\n                </div>\n                <input type="file" class="hidden" :id="upload" name="pics[]" multiple v-on:change="uploadImages"/>\n                <div class="col-sm-12" v-if="editMode">\n                    <button type="button" class="btn btn-default btn-lg btn-block" style="margin-bottom: 2%;" v-on:click=\'uploadToProject\'>Upload More</button>\n                </div>\n                \n            </div>\n            <div class="col-sm-12">\n                <div class="well">\n                    <form>\n                        <div class="form-group">\n                            <p>Project Title</p>\n                            <div class="well"  v-if="!editMode">\n                                <p>{{projectMain.title}}</p>\n                            </div>\n                            <input type="text" class="form-control dashboard-inputs" id="projectTitle" v-model=\'projectMain.title\' placeholder="Project Title" v-if="editMode" >\n                        </div>\n                        <div class="form-group">\n                        <ul class="nav nav-tabs" role="tablist">\n                            <li role="presentation" v-bind:class="{active: visible}">\n                                <a  v-on:click.stop.prevent="changeTextareas(true)">\n                                    English\n                                </a>\n                            </li>\n                            <li role="presentation" v-bind:class="{active: !visible}">\n                                <a  v-on:click.stop.prevent="changeTextareas(false)">\n                                    Serbian\n                                </a>\n                            </li>\n\n                        </ul>\n\n                            <!-- Tab panes -->\n                            <div class="tab-content">\n                                <div class="tab-pane active" v-bind:class="{active: visible}" v-show="visible">\n                                    <textarea class="form-control dashboard-inputs" rows="3" style=" resize: none;" v-model="projectMain.aboutenglish" v-if="editMode"></textarea>\n                                    <div class="well" v-if="!editMode">\n                                        <p >{{projectMain.aboutenglish}}</p>\n                                    </div>\n                                </div>\n                                <div class="tab-pane" v-bind:class="{active: !visible}" v-show="!visible">\n                                    <textarea class="form-control dashboard-inputs" rows="3" style=" resize: none;" v-model="projectMain.about" v-if="editMode"></textarea>\n                                    <div class="well" v-if="!editMode">\n                                        <p >{{projectMain.about}}</p>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                        <div class="col-sm-6">\n                            <button type="button" class="btn btn-success btn-lg btn-block" style="margin-bottom: 2%;" v-if="editMode" v-on:click="saveEdited">Save</button>\n                        </div>\n                        <div class="col-sm-6">\n                            <button type="button" class="btn btn-success btn-lg btn-block" style="margin-bottom: 2%;" v-if="editMode" v-on:click="editModeSwitch(false)">Cancel</button>\n                        </div>                        \n                        <button type="button" class="btn btn-success btn-lg btn-block" style="margin-bottom: 2%;" v-if="!editMode" v-on:click="editModeSwitch(true)">Edit</button>\n                    </form>\n                    <div class="clearfix" style="clear:both"></div>\n                </div>\n            </div>\n        </div>',
     props: {
-        url: ""
-
+        project: {}
     },
     data: function data() {
         return {
-            alternative: "",
-            hidden: true,
-            api: new _api2.default()
+            projectMain: this.project,
+            projectBackup: new _project2.default(),
+            api: new _api2.default(),
+            editMode: false,
+            visible: true
         };
     },
-
+    computed: {
+        upload: {
+            get: function get() {
+                return "upload-" + this.projectMain.id;
+            },
+            set: function set() {}
+        }
+    },
+    components: {
+        ThumbComponent: _thumb2.default
+    },
     methods: {
-        clear: function clear() {
+        uploadImages: function uploadImages(e) {
             var _this = this;
 
-            // this.api.removeUploadedPicture()
-            // clear is removing 2 same pictures if they are uploaded
-            // currently that is edge case and I will warn customer
-            // TODO: implement deleting picture from server otherwise it will pile up and create a mess
-            // console.log(this.url);
-            this.api.removeUploadedPicture(this.url).then(function (response) {
+            var images = Array.from(e.target.files); // from FileList object to array
+            var data = new FormData();
+            var form = images.reduce(function (data, img) {
+                data.append(img.name, img);
+                return data;
+            }, data);
+            var size = Array.from(form).reduce(function (sum, el) {
+                return sum += el[1].size;
+            }, 0);
+            var newSize = this.$parent.bytesToSize(size);
+            data.append("project_id", this.projectMain.id);
+            if (size < 1000000) {
+                this.$parent.processingAlert("It is uploading");
+                this.api.uploadPictures(data).then(function (response) {
+                    console.log(response);
+                    _this.projectMain.project_pics = _this.projectMain.project_pics ? _this.projectMain.project_pics.concat(response.data) : [];
+                    _this.$parent.showProcessing = false;
+                    _this.$parent.showSuccess('Succesfully document uploaded ' + newSize + ' ');
+                }).catch(function (error) {
+                    _this.$parent.processing = false;
+                    _this.$parent.handlerError(error);
+                    _this.$parent.showProcessing = false;
+                });
+            } else {
+                this.$parent.handlerError({ message: 'You uploaded ' + newSize + ' the limiti is  1MB' });
+            }
+        },
+        handleError: function handleError(message) {
+            console.log(message);
+            this.$parent.handlerError(message);
+        },
+
+        uploadToProject: function uploadToProject() {
+            $("#" + this.upload).click();
+        },
+        changeTextareas: function changeTextareas(bool) {
+            this.visible = bool;
+        },
+        editModeSwitch: function editModeSwitch(bool) {
+            this.editMode = bool;
+            if (bool) {
+                this.projectBackup = new _project2.default(this.projectMain.title, this.projectMain.aboutenglish, this.projectMain.about, this.projectMain.project_pics);
+            } else {
+                this.projectMain.title = this.projectBackup.title;
+                this.projectMain.about = this.projectBackup.about;
+                this.projectMain.aboutenglish = this.projectBackup.aboutenglish;
+            }
+        },
+        saveEdited: function saveEdited() {
+            var _this2 = this;
+
+            this.editMode = false;
+            this.projectBackup = new _project2.default();
+            this.api.updateProject(this.projectMain).then(function (response) {
                 console.log(response);
             }).catch(function (error) {
-                console.log(error);
+                var errors = JSON.parse(JSON.stringify(error.response.data));
+                errors.message = Object.keys(errors).map(function (el) {
+                    return errors[el];
+                }).join(", ");
+                _this2.handleError(errors);
             });
-            this.$parent.project.uploadedPics = this.$parent.project.uploadedPics.filter(function (el) {
-                return el == _this.url ? false : true;
-            });
-            this.$parent.project.pics = [];
         }
     }
 });
 
-exports.default = ThumbComponent;
+exports.default = ProjectComponent;
 
 /***/ }),
 /* 14 */
@@ -27299,13 +27413,19 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__(17);
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var bind = __webpack_require__(11);
-var Axios = __webpack_require__(18);
-var defaults = __webpack_require__(3);
+var bind = __webpack_require__(12);
+var Axios = __webpack_require__(19);
+var defaults = __webpack_require__(4);
 
 /**
  * Create an instance of Axios
@@ -27338,15 +27458,15 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(8);
-axios.CancelToken = __webpack_require__(17);
-axios.isCancel = __webpack_require__(9);
+axios.Cancel = __webpack_require__(9);
+axios.CancelToken = __webpack_require__(18);
+axios.isCancel = __webpack_require__(10);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(32);
+axios.spread = __webpack_require__(33);
 
 module.exports = axios;
 
@@ -27355,13 +27475,13 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Cancel = __webpack_require__(8);
+var Cancel = __webpack_require__(9);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -27419,16 +27539,16 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var defaults = __webpack_require__(3);
+var defaults = __webpack_require__(4);
 var utils = __webpack_require__(0);
-var InterceptorManager = __webpack_require__(19);
-var dispatchRequest = __webpack_require__(20);
+var InterceptorManager = __webpack_require__(20);
+var dispatchRequest = __webpack_require__(21);
 
 /**
  * Create a new instance of Axios
@@ -27505,7 +27625,7 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27564,18 +27684,18 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var transformData = __webpack_require__(23);
-var isCancel = __webpack_require__(9);
-var defaults = __webpack_require__(3);
-var isAbsoluteURL = __webpack_require__(28);
-var combineURLs = __webpack_require__(26);
+var transformData = __webpack_require__(24);
+var isCancel = __webpack_require__(10);
+var defaults = __webpack_require__(4);
+var isAbsoluteURL = __webpack_require__(29);
+var combineURLs = __webpack_require__(27);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -27657,7 +27777,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27685,13 +27805,13 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var createError = __webpack_require__(10);
+var createError = __webpack_require__(11);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -27718,7 +27838,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27745,7 +27865,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27788,7 +27908,7 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27863,7 +27983,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27884,7 +28004,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27944,7 +28064,7 @@ module.exports = (
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27965,7 +28085,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28040,7 +28160,7 @@ module.exports = (
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28059,7 +28179,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28119,7 +28239,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28153,29 +28273,31 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _project = __webpack_require__(12);
+var _project = __webpack_require__(13);
 
 var _project2 = _interopRequireDefault(_project);
 
-var _thumb = __webpack_require__(13);
+var _thumb = __webpack_require__(6);
 
 var _thumb2 = _interopRequireDefault(_thumb);
 
-var _api = __webpack_require__(5);
+var _api = __webpack_require__(2);
 
 var _api2 = _interopRequireDefault(_api);
 
+var _project3 = __webpack_require__(7);
+
+var _project4 = _interopRequireDefault(_project3);
+
 var _vueStrap = __webpack_require__(15);
 
-var _vue = __webpack_require__(2);
+var _vue = __webpack_require__(3);
 
 var _vue2 = _interopRequireDefault(_vue);
 
@@ -28205,13 +28327,7 @@ var app = new _vue2.default({
         api: new _api2.default(),
         visible: true,
         projects: [],
-
-        project: {
-            title: '',
-            eng: '',
-            srb: '',
-            uploadedPics: []
-        },
+        project: new _project4.default(),
         uploadedPics: []
 
     },
@@ -28247,6 +28363,7 @@ var app = new _vue2.default({
         uploadImages: function uploadImages(e) {
             var _this3 = this;
 
+            console.log(this);
             var images = Array.from(e.target.files); // from FileList object to array
             var data = new FormData();
             var form = images.reduce(function (data, img) {
@@ -28257,10 +28374,10 @@ var app = new _vue2.default({
                 return sum += el[1].size;
             }, 0);
             var newSize = this.bytesToSize(size);
-            console.log(size);
             if (size < 1000000) {
                 this.processingAlert("It is uploading");
                 this.api.uploadPictures(data).then(function (response) {
+                    console.log(response);
                     _this3.uploadedPics = _this3.uploadedPics ? _this3.uploadedPics.concat(response.data) : [];
                     _this3.showProcessing = false;
                     _this3.showSuccess('Succesfully document uploaded ' + newSize + ' ');
@@ -28293,26 +28410,35 @@ var app = new _vue2.default({
             return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
         },
         submit: function submit() {
-            var self = this;
-            this.$validator.validateAll().then(function (res) {
-                if (res) {
-                    self.createProject();
-                } else {
-                    var errorMessages = self.errors.all().join("\n");
-                    self.handlerError({ message: errorMessages });
-                }
-            });
-            console.log(this.errors);
-        },
-        createProject: function createProject() {
             var _this5 = this;
 
-            this.project.uploadedPics = this.uploadedPics;
+            this.$validator.validateAll().then(function (res) {
+                if (res) {
+                    _this5.createProject();
+                } else {
+                    var errorMessages = _this5.errors.all().join("\n");
+                    _this5.handlerError({ message: errorMessages });
+                }
+            });
+        },
+        createProject: function createProject() {
+            var _this6 = this;
+
+            this.project.project_pics = this.uploadedPics;
             this.api.createProject(this.project).then(function (response) {
                 console.log(response);
-            }, function (error) {
-                _this5.handlerError(error);
-                console.log(typeof error === 'undefined' ? 'undefined' : _typeof(error));
+                // this.projects.push(response.data);
+                // this.project = new Project();
+                // this.uploadedPics = [];
+                // $("#upload").val('');
+                // this.errors.clear();
+            }).catch(function (error) {
+                var errors = JSON.parse(JSON.stringify(error.response.data));
+                console.log(errors, error);
+                errors.message = Object.keys(errors).map(function (el) {
+                    return errors[el];
+                }).join(", ");
+                _this6.handlerError(errors);
             });
         }
     },
@@ -28329,7 +28455,7 @@ var app = new _vue2.default({
 });
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports) {
 
 /*!
@@ -28356,7 +28482,7 @@ function isSlowBuffer (obj) {
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -28546,10 +28672,10 @@ function isSlowBuffer (obj) {
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(1)))
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var apply = Function.prototype.apply;
@@ -28602,7 +28728,7 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(35);
+__webpack_require__(36);
 // On some exotic environments, it's not clear which object `setimmeidate` was
 // able to install onto.  Search each possibility in the same order as the
 // `setimmediate` library.
@@ -28613,7 +28739,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
                          (typeof global !== "undefined" && global.clearImmediate) ||
                          (this && this.clearImmediate);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ })
-],[33]);
+],[34]);

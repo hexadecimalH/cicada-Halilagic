@@ -28,18 +28,21 @@ class AdminService
         return $projects;
     }
 
-    public function uploadTemporaryImages($images)
+    public function uploadTemporaryImages($id = null, $images)
     {
-        $urls = $this->imageStorageService->storeImages("temp", $images);
 
+        $urls = $this->imageStorageService->storeImages("temp", $images);
+        $imagesObjects = []; 
         foreach ($urls as $url) {
             $pic = ProjectPic::create([
+                'project_id' => $id,
                 'url' => $url,
                 'type' => 'normal',
                 'data_title' => 'Interior Design']);
+            $imagesObjects[] = $pic->to_array();
         }
 
-        return $urls;
+        return $imagesObjects;
     }
 
     public function storeProjectImages($projectId, $images)
@@ -63,6 +66,18 @@ class AdminService
         $picture = ProjectPic::find($pictureId);
         $this->imageStorageService->removeContent($picture->url);
         $picture->delete();
+    }
+
+    public function deleteImageById($id){
+        /** @var ProjectPic $picture */
+        $picture = ProjectPic::find($id);
+        try{
+            $this->imageStorageService->removeContent($picture->url);
+            $picture->delete();
+            return true;
+        } catch (Exception $e){
+            return false;
+        }
     }
 
     public function deleteImageByUrl($url)
@@ -107,9 +122,9 @@ class AdminService
 
     public function assignProjectPictures($id, $uploadedPics){
         $pictures = [];
-        foreach($uploadedPics as $url){
+        foreach($uploadedPics as $picId){
             /** @var ProjectPic $picture */
-            $picture = ProjectPic::find('first',['conditions' => ['url LIKE ?', $url]]);
+            $picture = ProjectPic::find($picId);
             $picture->project_id = $id;
             $picture->save();
             $pictures[] = $picture->serialize();
@@ -143,6 +158,20 @@ class AdminService
             'data_title' => 'Interior Design',
             'data_light_box' => $proj->title]);
         return $thumbImage;
+    }
+
+    public function updateExistingProject($id, $title, $about, $aboutSrb){
+        /** @var Project $project */
+        $project = Project::find($id);
+        try{
+            $project->title = $title;
+            $project->about = $aboutSrb;
+            $project->aboutenglish = $about;
+            $project->save();
+            return true;
+        } catch (Exception $e){
+            return false;
+        }
     }
 
 }

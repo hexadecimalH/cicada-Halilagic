@@ -30,13 +30,12 @@
                             <div class="well">
                                 <div class="row">
                                     <template v-for="image in uploadedPics">
-                                        <thumb :url="image"></thumb>
+                                        <thumb :image="image"></thumb>
                                     </template>
 
                                 </div>
                             </div>
-                            <input type="file" class="hidden" id="upload" name="pics[]" v-on:change="uploadImages" data-vv-as="Project Pictures"
-                                   v-validate="'required'"
+                            <input type="file" class="hidden" id="upload" name="pics[]" v-on:change="uploadImages" data-vv-as="Project Pictures" v-validate="'required'"
                                    accept="image/*" multiple/>
                             <button type="button" class="btn btn-default btn-lg btn-block" v-on:click="upload"
                                     style="margin-bottom: 2%;">Upload
@@ -57,16 +56,12 @@
                                     <div class="form-group">
                                         <div class="col-sm-12">
                                             <ul class="nav nav-tabs" role="tablist">
-                                                <li role="presentation">
-                                                    <a href="#english"
-                                                       aria-controls="english"
-                                                       v-bind:class="{'active': true, 'error-area': errors.has('eng') }"
-                                                       role="tab"
-                                                       data-toggle="tab">English</a>
+                                                <li role="presentation" v-bind:class="{'active': true, 'error-area': errors.has('eng') }">
+                                                    <a href="#english" aria-controls="english" role="tab" data-toggle="tab">English</a>
                                                 </li>
-                                                <li role="presentation"><a href="#serbian" aria-controls="serbian"
-                                                                           v-bind:class="{'': true, 'error-area': errors.has('srb') }"
-                                                                           role="tab" data-toggle="tab">Serbian</a></li>
+                                                <li role="presentation" v-bind:class="{'': true, 'error-area': errors.has('srb') }"> 
+                                                    <a href="#serbian" aria-controls="serbian" role="tab" data-toggle="tab">Serbian</a>
+                                                </li>
                                             </ul>
 
                                             <!-- Tab panes -->
@@ -75,7 +70,7 @@
 
                                                     <div v-bind:class="{'form-group': true, 'has-errors': errors.has('eng') }">
                                                     <textarea class="form-control dashboard-inputs" rows="3" data-vv-as="English Description "
-                                                              v-validate="'required'" v-model="project.eng" name="eng"
+                                                              v-validate="'required'" v-model="project.aboutenglish" name="eng"
                                                               style=" resize: none;">English</textarea>
                                                     </div>
                                                     <div class="clearfix"></div>
@@ -83,7 +78,7 @@
                                                 <div role="tabpanel" class="tab-pane" id="serbian">
                                                     <div v-bind:class="{'form-group': true, 'has-errors': errors.has('srb') }">
                                                     <textarea class="form-control dashboard-inputs" rows="3" data-vv-as="Serbian Description "
-                                                              v-validate="'required'" v-model="project.srb" name="srb"
+                                                              v-validate="'required'" v-model="project.about" name="srb"
                                                               style=" resize: none;">Serbian</textarea>
                                                     </div>
                                                     <div class="clearfix"></div>
@@ -128,128 +123,9 @@
         </div>
     </div>
 </div>
-{#{% include 'parts/navigation.twig' with {'language' : language }%}#}
-{#<div class="container-fluid">#}
-{#<div class="row">#}
-{#<div class="col-sm-12 admin-heading">#}
-{#<h3>Admin Panel</h3>#}
-{#</div>#}
-{#</div>#}
-{#</div>#}
-{#<div class="container" id="proj-container">#}
-{#<div class="col-md-6 ">#}
-{#<div class="pannel-wrapper">#}
-{#<div class="panel panel-primary">#}
-{#<div class="panel-heading">#}
-{#<div class="row">#}
-{#<div class="col-xs-3">#}
-{#<i class="fa fa-book fa-5x" aria-hidden="true"></i>#}
-{#</div>#}
-{#<div class="col-xs-9 text-right">#}
-{#<div class="huge">{{ projects.length != 0 ? projects.length : 0}}</div>#}
-{#<div>Projects</div>#}
-{#</div>#}
-{#</div>#}
-{#</div>#}
-{#<a href="#" v-on:click="visible = true;">#}
-{#<div class="panel-footer">#}
-{#<span class="pull-left">Create new Projects</span>#}
-{#<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>#}
-{#<div class="clearfix"></div>#}
-{#</div>#}
-{#</a>#}
-{#</div>#}
-{#</div>#}
-{#</div>#}
-{#<div class="col-md-6 ">#}
-{#<div class="pannel-wrapper">#}
-{#<div class="panel panel-primary">#}
-{#<div class="panel-heading">#}
-{#<div class="row">#}
-{#<div class="col-xs-3">#}
-{#<i class="fa fa-align-justify fa-5x" aria-hidden="true"></i>#}
-{#</div>#}
-{#<div class="col-xs-9 text-right">#}
-{#<div class="huge">26</div>#}
-{#<div>Text nodes</div>#}
-{#</div>#}
-{#</div>#}
-{#</div>#}
-{#<a href="#" v-on:click="visible = false;">#}
-{#<div class="panel-footer">#}
-{#<span class="pull-left">Add or Edit Text Nodes</span>#}
-{#<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>#}
-{#<div class="clearfix"></div>#}
-{#</div>#}
-{#</a>#}
-{#</div>#}
-{#</div>#}
-{#</div>#}
-{#<div v-if="visible">#}
-{#<h1>This is projects</h1>#}
-{#</div>#}
-{#<div v-if="!visible">#}
-{#<h1>This is text node</h1>#}
-{#</div>#}
-{#{% for project in projects %}#}
-{#<div class="panel panel-default">#}
-{#<div class="panel-heading">#}
-{#<h3>#}
-{#<button class="btn btn-danger" id="delete" data-proj-id="{{project['id']}}" data-title="{{project['title']}}">Delete</button>#}
-{#<span class="headline" > {{project['title']}}</span>#}
-{#<button class="btn btn-success add" data-proj-id="{{project['id']}}" data-title="{{project['title']}}">Add</button>#}
-{#</h3>#}
-{#</div>#}
-{#<div class="panel-body">#}
-{#<div class="row" data-container-pic="{{project['id']}}">#}
-{#{% for picture in project['project_pics'] %}#}
-{#<div class="col-sm-3">#}
-{#<div class="{{picture['type']}} thumbnail" >#}
-{#<img src="{{picture['url']}}" alt="...">#}
-{#<div class="caption">#}
-{#<p>#}
-{#<a href="#" class="btn btn-danger delete" role="button" data-proj-id="{{project['id']}}" data-pic-id="{{picture['id']}}">Delete</a>#}
-{#{% if project.has_thumb == false %}#}
-{#<a href="#" class="btn btn-primary make-thumbnail" role="button" data-proj-id="{{project['id']}}" data-pic-id="{{picture['id']}}">Make Thumbnail</a>#}
-{#{% endif %}#}
-{##}
-{#</p>#}
-{#</div>#}
-{#</div>#}
-{#</div>#}
-{#{% endfor %}#}
-{#</div>#}
-{#</div>#}
-{#<div class="panel-footer">#}
-{#<form action="">#}
-{#<p>{{language == 'en' ? project['aboutenglish'] : project['about'] }}</p>#}
-{#<textarea name="about" class="hidden">{{language == 'en' ? project['aboutenglish'] : project['about'] }}</textarea>#}
-{#<p class="edit">#}
-{#<button class="btn btn-success" onclick="toEditMode(event)"> Edit</button>#}
-{#<button class="btn btn-success hidden" onclick="saveChanges(event)" data-id="{{project['id']}}" data-lang="{{language == 'en' ? 'en' : 'srb' }}"> Save</button>#}
-{#<button class="btn btn-primary hidden" onclick="cancelChanges(event)"> Cancel</button>#}
-{#</p>#}
-{#</form>#}
-{#</div>        #}
-{#</div>#}
-{#{% endfor %}#}
-{#</div>#}
-{#<div class="container-fluid">#}
-{#<div class="row">#}
-{#<div class="caption">#}
-{#<p>#}
-{#<button class="btn btn-primary" data-toggle="modal" data-target="#newProject">Create New Project</button>#}
-{#</p>#}
-{#</div>#}
-{#</div>#}
-{#</div>#}
-{#{% include 'parts/admin-modal.twig' %}#}
-{#{% include 'parts/admin-new-project-modal.twig' %}#}
-{#{% include 'parts/footer.twig'%} #}
+
 <script src="/front-end/resources/js/admin/commons.chunk.js"></script>
 <script src="/front-end/resources/js/admin/dashboard.chunk.js"></script>
-{#<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.runtime.js"></script>#}
-{#<script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.3.4/vue-resource.js"></script>#}
-{#<script src="/front-end/resources/js/vue-admin.js"></script>#}
+
 </body>
 </html>

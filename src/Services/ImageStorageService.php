@@ -41,7 +41,9 @@ class ImageStorageService
             $path = $this->basePath.'/'.$title.'/'.$imageName;
             if(!file_exists($this->basePath.'/uploads'.'/'.$title)){
                 mkdir($this->basePath.'/uploads'.'/'.$title, 0777, true);
+                
             }
+            chmod($this->basePath.'/uploads'.'/'.$title, 777);
             $path = $this->storeImageContents('/uploads'.'/'.$title.'/'.$imageName, $image);
             $urls[] = $this->getFullUrl($path);
             // Add resized image to result set
@@ -63,6 +65,7 @@ class ImageStorageService
 
     private function storeImageContents($path, $content){
         file_put_contents($this->basePath.$path, $content);
+        chmod($this->basePath.$path, 777);
         return $path;
     }
 
