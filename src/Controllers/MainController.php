@@ -3,6 +3,8 @@
 namespace Halilagic\Controllers;
 
 use Halilagic\Application;
+use Halilagic\Services\MainService;
+
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -11,12 +13,18 @@ class MainController
 {
     /** @var \Twig_Environment $twig */
     private $twig;
+    /** @var MainService $mainService */
     private $mainService;
 
     public function __construct($twig, $mainService)
     {
         $this->twig = $twig;
         $this->mainService = $mainService;
+    }
+
+    public function getProjectPictures(Application $app, Request $request){
+        $projectPics = $this->mainService->getProjectPics();
+        return new JsonResponse($projectPics);
     }
 
     public function index(Application $app, Request $request, $language){

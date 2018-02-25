@@ -7,8 +7,9 @@ var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
 module.exports = {
     entry: {
         'dashboard': './/resources/vue/admin/dashboard.js',
+        'home': './/resources/vue/home/index.js',
     },
-    output: { path: __dirname + '/front-end/resources/js/admin', filename: '[name].chunk.js' },
+    output: { path: __dirname + '/front-end/resources/js/', filename: '[name]/[name].chunk.js' },
     module: {
         loaders: [
             {

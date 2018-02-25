@@ -52,23 +52,15 @@ $adminRouteCollection->post('/update-project',              [$adminController, '
 $logInRouteCollection->get('/login',         [$logInController, 'logIn']);
 $logInRouteCollection->post('/login',        [$logInController, 'checkCredentials']);
 
+$mainRouteCollection->get('/project-pictures',         [ $mainController, 'getProjectPictures']);
 
 //Main Controller routes
 $mainRouteCollection->get('/projects',                  [ $mainController, 'projects']);
 $mainRouteCollection->get('/projects/{language}',       [ $mainController, 'projectsBegin']);
 $mainRouteCollection->get('/',                          [ $mainController, 'indexBegin']);
+
 $mainRouteCollection->get('/{language}',                [ $mainController, 'index']);
 $mainRouteCollection->post('/mail',                     [ $mainController, 'sendMail']);
-
-
-//Admin Controller routes
-// $adminRouteCollection->post('/upload/{projectId}',                      [$adminController, 'uploadPictures']);
-
-// $adminRouteCollection->post('/cancel',                                  [$adminController, 'cancelUploads']);
-// $adminRouteCollection->post('/project',                                 [$adminController, 'createProject']);
-// $adminRouteCollection->post('/project/{projectId}',                     [$adminController, 'deleteProject']);
-// $adminRouteCollection->post('/make-thumbnail/{pictureId}',              [$adminController, 'makeThumbnail']);
-
 
 
 //var_dump("hello");die();

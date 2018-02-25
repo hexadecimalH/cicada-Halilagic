@@ -117,11 +117,11 @@ var app = new Vue({
             this.api.createProject(this.project).then(
                 response => {
                     console.log(response);
-                    // this.projects.push(response.data);
-                    // this.project = new Project();
-                    // this.uploadedPics = [];
-                    // $("#upload").val('');
-                    // this.errors.clear();
+                    this.projects.push(response.data);
+                    this.project = new Project();
+                    this.uploadedPics = [];
+                    $("#upload").val('');
+                    this.errors.clear();
                 }).catch( 
                 error => {
                     var errors = JSON.parse(JSON.stringify(error.response.data));
